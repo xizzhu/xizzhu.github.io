@@ -3,7 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.xizzhu.me/bible/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.xizzhu.me/bible/%E4%B8%AD%E6%96%87%E5%92%8C%E5%90%88%E6%9C%AC/%E5%88%9B%E4%B8%96%E8%AE%B0/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/%E9%9A%8F%E7%AC%94/2015-11-08-%E4%BF%A1%E4%BB%B0-%E8%87%AA%E7%A7%81/</loc>
   </url>
   
   <url>
@@ -516,6 +524,10 @@
   
   <url>
     <loc>https://www.xizzhu.me/bible/%E4%B8%AD%E6%96%87%E5%92%8C%E5%90%88%E6%9C%AC/%E9%A9%AC%E5%A4%AA%E7%A6%8F%E9%9F%B3/002/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/%E9%9A%8F%E7%AC%94/</loc>
   </url>
   
   <url>
@@ -5028,10 +5040,6 @@
   
   <url>
     <loc>https://www.xizzhu.me/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.xizzhu.me/bible/</loc>
   </url>
   
   <url>
