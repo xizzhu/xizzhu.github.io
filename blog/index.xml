@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Xizhi Zhu</title>
+    <link>https://www.xizzhu.me/blog/</link>
+    <description>Recent content in Blog on Xizhi Zhu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://www.xizzhu.me/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Wrapping Existing Code With RxJava</title>
+      <link>https://www.xizzhu.me/blog/2016-09-06-rxjava-wrapping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2016-09-06-rxjava-wrapping/</guid>
+      <description>&lt;p&gt;We are using &lt;a href=&#34;https://github.com/ReactiveX/RxJava&#34;&gt;RxJava&lt;/a&gt; in Android a lot, with good reasons. However, we still need to use code that is not built with RxJava, so let&amp;rsquo;s wrap them.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Create Chooser Intent with Packages Excluded</title>
+      <link>https://www.xizzhu.me/blog/2016-01-14-chooser-intent-exclude-package/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2016-01-14-chooser-intent-exclude-package/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s extremely easy to &lt;a href=&#34;http://android-developers.blogspot.com/2012/02/share-with-intents.html&#34;&gt;share with Intent on Android&lt;/a&gt;. However, there are some apps that capture the &lt;code&gt;ACTION_SEND&lt;/code&gt; intents, but &lt;a href=&#34;https://developers.facebook.com/bugs/332619626816423&#34;&gt;doesn&amp;rsquo;t allow&lt;/a&gt; the app to pre-fill text set with &lt;code&gt;EXTRA_TEXT&lt;/code&gt;, resulting in poor user experience.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Write Own Osmosis Plugin</title>
+      <link>https://www.xizzhu.me/blog/2015-10-13-osm-osmosis-plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2015-10-13-osm-osmosis-plugin/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://wiki.openstreetmap.org/wiki/Osmosis&#34;&gt;Osmosis&lt;/a&gt; is a command line application for processing &lt;a href=&#34;http://www.openstreetmap.org&#34;&gt;Open Street Map&lt;/a&gt; data, with the souce code available &lt;a href=&#34;https://github.com/openstreetmap/osmosis&#34;&gt;here&lt;/a&gt;. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BLE on Android</title>
+      <link>https://www.xizzhu.me/blog/2015-06-02-android-ble-bluetooth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2015-06-02-android-ble-bluetooth/</guid>
+      <description>&lt;p&gt;Android supported &lt;a href=&#34;http://www.bluetooth.com/Pages/Bluetooth-Smart.aspx&#34;&gt;Bluetooth Low Energy / Bluetooth Smart&lt;/a&gt; since &lt;a href=&#34;https://developer.android.com/about/versions/android-4.3.html#Wireless&#34;&gt;4.3 / API level 18&lt;/a&gt;. However, it’s not nice, in many ways.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go’s defer statement in C&#43;&#43;</title>
+      <link>https://www.xizzhu.me/blog/2013-10-14-go-defer-statement-c/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2013-10-14-go-defer-statement-c/</guid>
+      <description>&lt;p&gt;The Go language provides a useful &lt;a href=&#34;http://blog.golang.org/defer-panic-and-recover&#34;&gt;defer statement&lt;/a&gt; to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C++, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Displaying Images Efficiently on Android</title>
+      <link>https://www.xizzhu.me/blog/2013-09-09-display-image-efficiently-android/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2013-09-09-display-image-efficiently-android/</guid>
+      <description>&lt;p&gt;In this blog post, we demonstrate some simple ways to efficiently display images.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>D-Pointer / Private Implementation in Qt</title>
+      <link>https://www.xizzhu.me/blog/2010-11-25-qt-private-impl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2010-11-25-qt-private-impl/</guid>
+      <description>&lt;p&gt;I believe many of you who just start reading the source code of Qt will have the question: why Qt uses those private classes? What&amp;rsquo;s the benefit of such a design pattern? Well, the most significant reason is to &lt;strong&gt;keep the binary compatibility&lt;/strong&gt;.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hybrid Application Using QML and Qt C&#43;&#43;</title>
+      <link>https://www.xizzhu.me/blog/2010-10-28-hybrid-qml-qt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.xizzhu.me/blog/2010-10-28-hybrid-qml-qt/</guid>
+      <description>&lt;p&gt;Though QML provides a nice way to design user interfaces, and JavaScript is employed there to implement the application logic and works pretty nice in many cases, we might still need Qt C++ in some situations (well, at least JavaScript has limited access outside its sandbox).
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

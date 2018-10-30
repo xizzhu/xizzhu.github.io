@@ -279,6 +279,10 @@
   </url>
   
   <url>
+    <loc>https://www.xizzhu.me/blog/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.xizzhu.me/bible/%E4%B8%AD%E6%96%87%E5%92%8C%E5%90%88%E6%9C%AC/%E5%87%BA%E5%9F%83%E5%8F%8A%E8%AE%B0/</loc>
   </url>
   
@@ -527,10 +531,6 @@
   </url>
   
   <url>
-    <loc>https://www.xizzhu.me/%E9%9A%8F%E7%AC%94/</loc>
-  </url>
-  
-  <url>
     <loc>https://www.xizzhu.me/bible/%E4%B8%AD%E6%96%87%E5%92%8C%E5%90%88%E6%9C%AC/%E5%88%A9%E6%9C%AA%E8%AE%B0/</loc>
   </url>
   
@@ -772,6 +772,10 @@
   
   <url>
     <loc>https://www.xizzhu.me/bible/%E4%B8%AD%E6%96%87%E5%92%8C%E5%90%88%E6%9C%AC/%E9%A9%AC%E5%A4%AA%E7%A6%8F%E9%9F%B3/003/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/%E9%9A%8F%E7%AC%94/</loc>
   </url>
   
   <url>
@@ -5035,6 +5039,38 @@
   </url>
   
   <url>
+    <loc>https://www.xizzhu.me/blog/2016-09-06-rxjava-wrapping/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2016-01-14-chooser-intent-exclude-package/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2015-10-13-osm-osmosis-plugin/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2015-06-02-android-ble-bluetooth/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2013-10-14-go-defer-statement-c/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2013-09-09-display-image-efficiently-android/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2010-11-25-qt-private-impl/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/blog/2010-10-28-hybrid-qml-qt/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.xizzhu.me/_footer/</loc>
   </url>
   
@@ -5043,7 +5079,57 @@
   </url>
   
   <url>
+    <loc>https://www.xizzhu.me/android/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/tags/android/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.xizzhu.me/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/go/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/tags/go/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/osm/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/tags/osm/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/qt/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/tags/qt/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/rxjava/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xizzhu.me/tags/rxjava/</loc>
     <priority>0</priority>
   </url>
   
@@ -5057,12 +5143,12 @@
   </url>
   
   <url>
-    <loc>https://www.xizzhu.me/%E4%BF%A1%E4%BB%B0/</loc>
+    <loc>https://www.xizzhu.me/tags/%E4%BF%A1%E4%BB%B0/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.xizzhu.me/tags/%E4%BF%A1%E4%BB%B0/</loc>
+    <loc>https://www.xizzhu.me/%E4%BF%A1%E4%BB%B0/</loc>
     <priority>0</priority>
   </url>
   
