@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Xizhi Zhu</title>
+    <link>https://xizzhu.me/tags/go/</link>
+    <description>Recent content in Go on Xizhi Zhu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Oct 2013 00:00:00 -0700</lastBuildDate>
+    
+	<atom:link href="https://xizzhu.me/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go’s defer statement in C&#43;&#43;</title>
+      <link>https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/</link>
+      <pubDate>Mon, 14 Oct 2013 00:00:00 -0700</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/</guid>
+      <description>&lt;p&gt;The Go language provides a useful &lt;a href=&#34;http://blog.golang.org/defer-panic-and-recover&#34;&gt;defer statement&lt;/a&gt; to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C++, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue.
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
