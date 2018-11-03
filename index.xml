@@ -62,6 +62,56 @@
     </item>
     
     <item>
+      <title>Play with Google Play Services - Android Wear</title>
+      <link>https://xizzhu.me/posts/2015-04-20-google-play-services-android-wear/</link>
+      <pubDate>Mon, 20 Apr 2015 00:00:00 -0700</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2015-04-20-google-play-services-android-wear/</guid>
+      <description>&lt;p&gt;If you haven’t set up Google Play services yet, please follow &lt;a href=&#34;https://xizzhu.me/posts/2014-02-07-google-play-services-set-up&#34;&gt;this tutorial&lt;/a&gt;. Today we demonstrate how to use Android Wear on devices with Android 4.3 or higher and BLE support.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Play with Google Play Services - Locations</title>
+      <link>https://xizzhu.me/posts/2014-11-10-google-play-services-locations/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 -0800</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2014-11-10-google-play-services-locations/</guid>
+      <description>&lt;p&gt;If you haven’t set up Google Play services yet, please follow &lt;a href=&#34;https://xizzhu.me/posts/2014-02-07-google-play-services-set-up&#34;&gt;this tutorial&lt;/a&gt;.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Play with Google Play Services - Push Notification</title>
+      <link>https://xizzhu.me/posts/2014-02-26-google-play-services-push-notification-cloud-messaging/</link>
+      <pubDate>Wed, 26 Feb 2014 00:00:00 -0800</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2014-02-26-google-play-services-push-notification-cloud-messaging/</guid>
+      <description>&lt;p&gt;If you haven’t set up Google Play services yet, please follow &lt;a href=&#34;https://xizzhu.me/posts/2014-02-07-google-play-services-set-up&#34;&gt;this tutorial&lt;/a&gt;. Today, we demonstrate how to use the cloud messaging / push notification.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Play with Google Play Services - Map</title>
+      <link>https://xizzhu.me/posts/2014-02-10-google-play-services-map/</link>
+      <pubDate>Mon, 10 Feb 2014 00:00:00 -0800</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2014-02-10-google-play-services-map/</guid>
+      <description>&lt;p&gt;If you haven’t set up Google Play services yet, please follow &lt;a href=&#34;https://xizzhu.me/posts/2014-02-07-google-play-services-set-up&#34;&gt;this tutorial&lt;/a&gt;.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Play with Google Play Services - Set Up</title>
+      <link>https://xizzhu.me/posts/2014-02-07-google-play-services-set-up/</link>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 -0800</pubDate>
+      
+      <guid>https://xizzhu.me/posts/2014-02-07-google-play-services-set-up/</guid>
+      <description>&lt;p&gt;Google has offered a bunch of services that developers can use in their Android apps. In this and following few blog posts, we demonstrate how easy it is to use them. Now, let&amp;rsquo;s get everything setup.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Go’s defer statement in C&#43;&#43;</title>
       <link>https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/</link>
       <pubDate>Mon, 14 Oct 2013 00:00:00 -0700</pubDate>

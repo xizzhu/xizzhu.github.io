@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Android on Xizhi Zhu</title>
-    <link>https://xizzhu.me/tags/android/</link>
-    <description>Recent content in Android on Xizhi Zhu</description>
+    <title>Google Play Services on Xizhi Zhu</title>
+    <link>https://xizzhu.me/tags/google-play-services/</link>
+    <description>Recent content in Google Play Services on Xizhi Zhu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2016 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2015 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="https://xizzhu.me/tags/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xizzhu.me/tags/google-play-services/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Create Chooser Intent with Packages Excluded</title>
-      <link>https://xizzhu.me/posts/2016-01-14-chooser-intent-exclude-package/</link>
-      <pubDate>Thu, 14 Jan 2016 00:00:00 -0800</pubDate>
-      
-      <guid>https://xizzhu.me/posts/2016-01-14-chooser-intent-exclude-package/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s extremely easy to &lt;a href=&#34;http://android-developers.blogspot.com/2012/02/share-with-intents.html&#34;&gt;share with Intent on Android&lt;/a&gt;. However, there are some apps that capture the &lt;code&gt;ACTION_SEND&lt;/code&gt; intents, but &lt;a href=&#34;https://developers.facebook.com/bugs/332619626816423&#34;&gt;doesn&amp;rsquo;t allow&lt;/a&gt; the app to pre-fill text set with &lt;code&gt;EXTRA_TEXT&lt;/code&gt;, resulting in poor user experience.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BLE on Android</title>
-      <link>https://xizzhu.me/posts/2015-06-02-android-ble-bluetooth/</link>
-      <pubDate>Tue, 02 Jun 2015 00:00:00 -0700</pubDate>
-      
-      <guid>https://xizzhu.me/posts/2015-06-02-android-ble-bluetooth/</guid>
-      <description>&lt;p&gt;Android supported &lt;a href=&#34;http://www.bluetooth.com/Pages/Bluetooth-Smart.aspx&#34;&gt;Bluetooth Low Energy / Bluetooth Smart&lt;/a&gt; since &lt;a href=&#34;https://developer.android.com/about/versions/android-4.3.html#Wireless&#34;&gt;4.3 / API level 18&lt;/a&gt;. However, it’s not nice, in many ways.
-&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>Play with Google Play Services - Android Wear</title>
@@ -78,16 +58,6 @@
       
       <guid>https://xizzhu.me/posts/2014-02-07-google-play-services-set-up/</guid>
       <description>&lt;p&gt;Google has offered a bunch of services that developers can use in their Android apps. In this and following few blog posts, we demonstrate how easy it is to use them. Now, let&amp;rsquo;s get everything setup.
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Displaying Images Efficiently on Android</title>
-      <link>https://xizzhu.me/posts/2013-09-09-display-image-efficiently-android/</link>
-      <pubDate>Mon, 09 Sep 2013 00:00:00 -0700</pubDate>
-      
-      <guid>https://xizzhu.me/posts/2013-09-09-display-image-efficiently-android/</guid>
-      <description>&lt;p&gt;In this blog post, we demonstrate some simple ways to efficiently display images.
 &lt;/p&gt;</description>
     </item>
     

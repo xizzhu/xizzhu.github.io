@@ -7,20 +7,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Go’s defer statement in C&#43;&#43; - Xizhi Zhu</title>
-  <meta property="og:title" content="Go’s defer statement in C&#43;&#43;" />
-  <meta name="twitter:title" content="Go’s defer statement in C&#43;&#43;" />
-  <meta name="description" content="The Go language provides a useful defer statement to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C&#43;&#43;, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue.
-">
-  <meta property="og:description" content="The Go language provides a useful defer statement to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C&#43;&#43;, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue.
-">
-  <meta name="twitter:description" content="The Go language provides a useful defer statement to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C&#43;&#43;, things get tricky e.g. when …">
+  <title>Posts - Xizhi Zhu</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
   <meta name="author" content=""/>
   <link href='https://xizzhu.me/images/logo.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="https://xizzhu.me/images/logo.png" />
   <meta name="twitter:image" content="https://xizzhu.me/images/logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/" />
+  <meta property="og:url" content="https://xizzhu.me/posts/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Xizhi Zhu" />
 
@@ -46,38 +41,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
-    <script type="application/ld+json"> {
-  "@context" : "http://schema.org",
-  "@type" : "BlogPosting",
-  
-  "name" : "Go’s defer statement in C&#43;&#43;",
-  "headline" : "Go’s defer statement in C&#43;&#43;",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/"
-  },
-  "description" : "The Go language provides a useful defer statement to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C&#43;&#43;, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue. ",
-  "inLanguage" : "en",
-  
-  "copyrightYear" : " - 2016",
-  "datePublished": "2013-10-14T00:00:00-07:00",
-  "dateModified": "2013-10-14T00:00:00-07:00",
-  "url" : "https://xizzhu.me/posts/2013-10-14-go-defer-statement-c/",
-  "wordCount" : "157",
-  "image" : "https://xizzhu.me/images/logo.png",
-  "keywords" : [ "go" ],
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https://xizzhu.me/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https://xizzhu.me/images/logo.png",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-} </script>
-  
+      
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -203,7 +167,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Go’s defer statement in C&#43;&#43;</h1>
+                <h1>Posts</h1>
               
               
                 <hr class="small">
@@ -219,85 +183,137 @@ if (!doNotTrack) {
 
 
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>The Go language provides a useful <a href="http://blog.golang.org/defer-panic-and-recover">defer statement</a> to guarantee certain code is always executed when returning from the current scope. Though we can use constructor in C++, things get tricky e.g. when a pointer needs to be deleted. Here we present some simple draft code to solve this issue.
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="https://xizzhu.me/posts/2013-09-09-display-image-efficiently-android/">
+                <h2 class="post-title">Displaying Images Efficiently on Android</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on September 9, 2013
+  
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  <p>In this blog post, we demonstrate some simple ways to efficiently display images.
 </p>
+                  <a href="https://xizzhu.me/posts/2013-09-09-display-image-efficiently-android/" class="post-read-more">[Read More]</a>
+                
+              </div>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;functional&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span> 
-<span style="color:#75715e">// the user should fill copy and move constructors
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span><span style="color:#960050;background-color:#1e0010"> </span><span style="color:#a6e22e">DeferredAction</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    DeferredAction(<span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">&gt;&amp;</span> deferred) <span style="color:#f92672">:</span> m_deferred(deferred) {}
- 
-    <span style="color:#f92672">~</span>DeferredAction() {
-        <span style="color:#66d9ef">if</span> (m_deferred)
-            m_deferred();
-    }
- 
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    std<span style="color:#f92672">::</span>function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">void</span>)<span style="color:#f92672">&gt;</span> m_deferred;
-};
-</code></pre></div>
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xizzhu.me//tags/android/">android</a>&nbsp;
+                  
+                </div>
+              
 
-<p>Then if the client code looks like the following:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;deferredaction.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span> 
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span> 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    DeferredAction deferred([] () {
-        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;executed when the &#39;deferred&#39; object is destructed&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-    });
-    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;print some random stuff here&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></p>
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xizzhu.me/posts/2010-11-25-qt-private-impl/">
+                <h2 class="post-title">D-Pointer / Private Implementation in Qt</h2>
 
-<p>It will first print the line: <em>print some random stuff here</em>. Then when the deferred object is destructed when main() returns, it prints the second line: <em>executed when the &lsquo;deferred&rsquo; object is destructed</em>.</p>
+                
+              </a>
 
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on November 25, 2010
+  
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  <p>I believe many of you who just start reading the source code of Qt will have the question: why Qt uses those private classes? What&rsquo;s the benefit of such a design pattern? Well, the most significant reason is to <strong>keep the binary compatibility</strong>.
+</p>
+                  <a href="https://xizzhu.me/posts/2010-11-25-qt-private-impl/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xizzhu.me//tags/qt/">qt</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="https://xizzhu.me/posts/2010-10-28-hybrid-qml-qt/">
+                <h2 class="post-title">Hybrid Application Using QML and Qt C&#43;&#43;</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on October 28, 2010
+  
+  
+  
+</span>
+
+
+              </p>
+              <div class="post-entry">
+                
+                  <p>Though QML provides a nice way to design user interfaces, and JavaScript is employed there to implement the application logic and works pretty nice in many cases, we might still need Qt C++ in some situations (well, at least JavaScript has limited access outside its sandbox).
+</p>
+                  <a href="https://xizzhu.me/posts/2010-10-28-hybrid-qml-qt/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <div class="blog-tags">
+                  
+                    <a href="https://xizzhu.me//tags/qt/">qt</a>&nbsp;
+                  
+                </div>
+              
+
+            </article>
+          
+        </div>
         
-          <div class="blog-tags">
+          <ul class="pager main-pager">
             
-              <a href="https://xizzhu.me//tags/go/">go</a>&nbsp;
+              <li class="previous">
+                <a href="/posts/page/1/">&larr; Newer Posts</a>
+              </li>
             
-          </div>
+            
+          </ul>
         
-
-        
-
-        
-          
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://xizzhu.me/posts/2013-09-09-display-image-efficiently-android/" data-toggle="tooltip" data-placement="top" title="Displaying Images Efficiently on Android">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://xizzhu.me/posts/2014-02-07-google-play-services-set-up/" data-toggle="tooltip" data-placement="top" title="Play with Google Play Services - Set Up">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      
-
-
-      
-
+      </div>
     </div>
   </div>
-</div>
 
     <footer>
   <div class="container">
