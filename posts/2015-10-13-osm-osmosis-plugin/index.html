@@ -1,479 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Write Own Osmosis Plugin - Xizhi Zhu</title><meta property=og:title content="Write Own Osmosis Plugin"><meta name=twitter:title content="Write Own Osmosis Plugin"><meta name=description content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands."><meta property=og:description content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands."><meta name=twitter:description content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a …"><meta name=author content><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta property=og:image content=https://xizzhu.me/images/logo.png><meta name=twitter:image content=https://xizzhu.me/images/logo.png><meta name=twitter:card content=summary><meta property=og:url content=https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/><meta property=og:type content=website><meta property=og:site_name content="Xizhi Zhu"><meta name=generator content="Hugo 0.50"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title="Xizhi Zhu"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css integrity=sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0 crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css integrity=sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-128400000-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","name":"Write Own Osmosis Plugin","headline":"Write Own Osmosis Plugin","mainEntityOfPage":{"@type":"WebPage","@id":"https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/"},"description":"Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands. ","inLanguage":"en","copyrightYear":" - 2016","datePublished":"2015-10-13T00:00:00-07:00","dateModified":"2015-10-13T00:00:00-07:00","url":"https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/","wordCount":"578","image":"https://xizzhu.me/images/logo.png","keywords":["osm"],"publisher":{"@type":"Organization","name":"https://xizzhu.me/","logo":{"@type":"ImageObject","url":"https://xizzhu.me/images/logo.png","height":60,"width":60}}}</script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=https://xizzhu.me/>Xizhi Zhu</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=Posts href=/posts>Posts</a></li><li><a title=Bible href=/bible>Bible</a></li><li><a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title="Xizhi Zhu" href=https://xizzhu.me/><img class=avatar-img src=https://xizzhu.me/images/logo.png alt="Xizhi Zhu"></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-heading><h1>Write Own Osmosis Plugin</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p><a href=http://wiki.openstreetmap.org/wiki/Osmosis>Osmosis</a> is a command line application for processing <a href=http://www.openstreetmap.org>Open Street Map</a> data, with the souce code available <a href=https://github.com/openstreetmap/osmosis>here</a>. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands.</p><p>Now, let&rsquo;s start.</p><h2 id=write-a-simple-plugin>Write a Simple Plugin</h2><p>An <em>osmosis</em> plugin is basically a normal jar, plus a <code>plugin.xml</code> file that describes how to load the plugin as shown below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; ?&gt;&lt;!DOCTYPE plugin PUBLIC &#34;-//JPF//Java Plug-in Manifest 1.0&#34;
+</span><span style=color:#75715e>    &#34;http://jpf.sourceforge.net/plugin_1_0.dtd&#34;&gt;</span>
+<span style=color:#75715e>&lt;!-- Here, provides a unique ID and version for your plugin. --&gt;</span>
+<span style=color:#f92672>&lt;plugin</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;MyPlugin&#34;</span> <span style=color:#a6e22e>version=</span><span style=color:#e6db74>&#34;1.0&#34;</span><span style=color:#f92672>&gt;</span>
+    <span style=color:#f92672>&lt;requires&gt;</span>
+        <span style=color:#f92672>&lt;import</span> <span style=color:#a6e22e>plugin-id=</span><span style=color:#e6db74>&#34;org.openstreetmap.osmosis.core.plugin.Core&#34;</span> <span style=color:#a6e22e>reverse-lookup=</span><span style=color:#e6db74>&#34;false&#34;</span> <span style=color:#f92672>/&gt;</span>
+    <span style=color:#f92672>&lt;/requires&gt;</span>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <span style=color:#f92672>&lt;runtime&gt;</span>
+        <span style=color:#f92672>&lt;library</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;mycode&#34;</span> <span style=color:#a6e22e>path=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>type=</span><span style=color:#e6db74>&#34;code&#34;</span> <span style=color:#f92672>/&gt;</span>
+    <span style=color:#f92672>&lt;/runtime&gt;</span>
 
-  <title>Write Own Osmosis Plugin - Xizhi Zhu</title>
-  <meta property="og:title" content="Write Own Osmosis Plugin" />
-  <meta name="twitter:title" content="Write Own Osmosis Plugin" />
-  <meta name="description" content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands.
-">
-  <meta property="og:description" content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands.
-">
-  <meta name="twitter:description" content="Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a …">
-  <meta name="author" content=""/>
-  <link href='https://xizzhu.me/images/logo.png' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://xizzhu.me/images/logo.png" />
-  <meta name="twitter:image" content="https://xizzhu.me/images/logo.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta property="og:url" content="https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Xizhi Zhu" />
+    <span style=color:#75715e>&lt;!-- Describes where the plugin plugs into. --&gt;</span>
+    <span style=color:#f92672>&lt;extension</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;MyPlugin&#34;</span>
+        <span style=color:#a6e22e>plugin-id=</span><span style=color:#e6db74>&#34;org.openstreetmap.osmosis.core.plugin.Core&#34;</span> <span style=color:#a6e22e>point-id=</span><span style=color:#e6db74>&#34;Task&#34;</span><span style=color:#f92672>&gt;</span>
+        <span style=color:#f92672>&lt;parameter</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;name&#34;</span> <span style=color:#a6e22e>value=</span><span style=color:#e6db74>&#34;MyPlugin&#34;</span> <span style=color:#f92672>/&gt;</span>
+        <span style=color:#75715e>&lt;!-- Here, give the fully qualified name for your class loader. --&gt;</span>
+        <span style=color:#f92672>&lt;parameter</span> <span style=color:#a6e22e>id=</span><span style=color:#e6db74>&#34;class&#34;</span> <span style=color:#a6e22e>value=</span><span style=color:#e6db74>&#34;net.zionsoft.sample.osmosisplugin.MyPluginLoader&#34;</span> <span style=color:#f92672>/&gt;</span>
+    <span style=color:#f92672>&lt;/extension&gt;</span>
+<span style=color:#f92672>&lt;/plugin&gt;</span></code></pre></div></p><p>As we can see, the plugin is loaded by <code>MyPluginLoader</code>:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyPluginLoader</span> <span style=color:#66d9ef>implements</span> PluginLoader <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> TaskManagerFactory<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>loadTaskFactories</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// the map describes how to load the plugin
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// with the following statement, you can load the task
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// created by MyFactory using:
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// osmosis --read-pbf latest.osm.pbf --my-plugin
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// you can also create multiple factories that create
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// different tasks if needed
+</span><span style=color:#75715e></span>        HashMap<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> TaskManagerFactory<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;my-plugin&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> MyFactory<span style=color:#f92672>());</span>
+        <span style=color:#66d9ef>return</span> map<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span></code></pre></div></p><p>The following shows <code>MyFactory</code> that creates the real tasks:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyFactory</span> <span style=color:#66d9ef>extends</span> TaskManagerFactory <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>protected</span> TaskManager <span style=color:#a6e22e>createTaskManagerImpl</span><span style=color:#f92672>(</span>TaskConfiguration taskConfiguration<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// the provided configuration includes the argument you pass to osmosis,
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// which can be used to config the task to be created
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// e.g. if you started osmosis like this:
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// osmosis --read-pbf latest.osm.pbf --my-plugin key=value
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// you can get fetch the passed argument like this:
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// String value = getStringArgument(taskConfiguration, &#34;key&#34;, null);
+</span><span style=color:#75715e></span>
+        MyTask myTask <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MyTask<span style=color:#f92672>();</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> SinkManager<span style=color:#f92672>(</span>taskConfiguration<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>(),</span> myTask<span style=color:#f92672>,</span> taskConfiguration<span style=color:#f92672>.</span><span style=color:#a6e22e>getPipeArgs</span><span style=color:#f92672>());</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span></code></pre></div></p><p>Now, a simple task that does nothing but print some messages:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyTask</span> <span style=color:#66d9ef>implements</span> Sink <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>initialize</span><span style=color:#f92672>(</span>Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;</span> map<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// initializes resources you need
+</span><span style=color:#75715e></span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;initialize()&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
 
-  <meta name="generator" content="Hugo 0.50" />
-  <link rel="alternate" href="https://xizzhu.me/index.xml" type="application/rss+xml" title="Xizhi Zhu">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://xizzhu.me/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://xizzhu.me/css/syntax.css" /><link rel="stylesheet" href="https://xizzhu.me/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>process</span><span style=color:#f92672>(</span>EntityContainer entityContainer<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// processes each entity
+</span><span style=color:#75715e></span>        Entity entity <span style=color:#f92672>=</span> entityContainer<span style=color:#f92672>.</span><span style=color:#a6e22e>getEntity</span><span style=color:#f92672>();</span>
+        EntityType entityType <span style=color:#f92672>=</span> entity<span style=color:#f92672>.</span><span style=color:#a6e22e>getType</span><span style=color:#f92672>();</span>
+        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;process(): &#34;</span> <span style=color:#f92672>+</span> entityType<span style=color:#f92672>);</span>
 
+        <span style=color:#66d9ef>switch</span> <span style=color:#f92672>(</span>entityType<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>case</span> Bound:
+                Bound bound <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Bound<span style=color:#f92672>)</span> entity<span style=color:#f92672>;</span>
+                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>bound<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>case</span> Node:
+                Node node <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Node<span style=color:#f92672>)</span> entity<span style=color:#f92672>;</span>
+                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>node<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>case</span> Way:
+                Way way <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Way<span style=color:#f92672>)</span> entity<span style=color:#f92672>;</span>
+                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>way<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+            <span style=color:#66d9ef>case</span> Relation:
+                Relation relation <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Relation<span style=color:#f92672>)</span> entity<span style=color:#f92672>;</span>
+                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>relation<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+                <span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
 
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-128400000-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>complete</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// makes sure all info is fully persisted
+</span><span style=color:#75715e></span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;complete()&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
 
-
-    <script type="application/ld+json"> {
-  "@context" : "http://schema.org",
-  "@type" : "BlogPosting",
-  
-  "name" : "Write Own Osmosis Plugin",
-  "headline" : "Write Own Osmosis Plugin",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/"
-  },
-  "description" : "Osmosis is a command line application for processing Open Street Map data, with the souce code available here. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands. ",
-  "inLanguage" : "en",
-  
-  "copyrightYear" : " - 2016",
-  "datePublished": "2015-10-13T00:00:00-07:00",
-  "dateModified": "2015-10-13T00:00:00-07:00",
-  "url" : "https://xizzhu.me/posts/2015-10-13-osm-osmosis-plugin/",
-  "wordCount" : "578",
-  "image" : "https://xizzhu.me/images/logo.png",
-  "keywords" : [ "osm" ],
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https://xizzhu.me/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https://xizzhu.me/images/logo.png",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-} </script>
-  
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="https://xizzhu.me/">Xizhi Zhu</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-        
-          
-            <li>
-              <a title="Posts" href="/posts">Posts</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Bible" href="/bible">Bible</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="随笔" href="/%e9%9a%8f%e7%ac%94">随笔</a>
-            </li>
-          
-        
-
-        
-
-        
-      </ul>
-    </div>
-
-    
-      <div class="avatar-container">
-        <div class="avatar-img-border">
-          <a title="Xizhi Zhu" href="https://xizzhu.me/">
-            <img class="avatar-img" src="https://xizzhu.me/images/logo.png" alt="Xizhi Zhu" />
-          </a>
-        </div>
-      </div>
-    
-
-  </div>
-</nav>
-
-
-
-
-    
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-<div class="pswp__bg"></div>
-
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
-
-
-  
-  
-  
-
-
-
-
-
-
-  
-
-  <header class="header-section ">
-    
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="posts-heading">
-              
-                <h1>Write Own Osmosis Plugin</h1>
-              
-              
-                <hr class="small">
-              
-              
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-    
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p><a href="http://wiki.openstreetmap.org/wiki/Osmosis">Osmosis</a> is a command line application for processing <a href="http://www.openstreetmap.org">Open Street Map</a> data, with the souce code available <a href="https://github.com/openstreetmap/osmosis">here</a>. The tool provides e.g. ability to generate and read data dumps, extract data inside a bounding box, etc. You can also easily write your own plugin to convert OSM data to e.g. formats your application understands.
-</p>
-
-<p>Now, let&rsquo;s start.</p>
-
-<h2 id="write-a-simple-plugin">Write a Simple Plugin</h2>
-
-<p>An <em>osmosis</em> plugin is basically a normal jar, plus a <code>plugin.xml</code> file that describes how to load the plugin as shown below:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;&lt;!DOCTYPE plugin PUBLIC &#34;-//JPF//Java Plug-in Manifest 1.0&#34;
-</span><span style="color:#75715e">    &#34;http://jpf.sourceforge.net/plugin_1_0.dtd&#34;&gt;</span>
-<span style="color:#75715e">&lt;!-- Here, provides a unique ID and version for your plugin. --&gt;</span>
-<span style="color:#f92672">&lt;plugin</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;MyPlugin&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;requires&gt;</span>
-        <span style="color:#f92672">&lt;import</span> <span style="color:#a6e22e">plugin-id=</span><span style="color:#e6db74">&#34;org.openstreetmap.osmosis.core.plugin.Core&#34;</span> <span style="color:#a6e22e">reverse-lookup=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/requires&gt;</span>
-
-    <span style="color:#f92672">&lt;runtime&gt;</span>
-        <span style="color:#f92672">&lt;library</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;mycode&#34;</span> <span style="color:#a6e22e">path=</span><span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;code&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/runtime&gt;</span>
-
-    <span style="color:#75715e">&lt;!-- Describes where the plugin plugs into. --&gt;</span>
-    <span style="color:#f92672">&lt;extension</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;MyPlugin&#34;</span>
-        <span style="color:#a6e22e">plugin-id=</span><span style="color:#e6db74">&#34;org.openstreetmap.osmosis.core.plugin.Core&#34;</span> <span style="color:#a6e22e">point-id=</span><span style="color:#e6db74">&#34;Task&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;parameter</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;MyPlugin&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#75715e">&lt;!-- Here, give the fully qualified name for your class loader. --&gt;</span>
-        <span style="color:#f92672">&lt;parameter</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;class&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;net.zionsoft.sample.osmosisplugin.MyPluginLoader&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/extension&gt;</span>
-<span style="color:#f92672">&lt;/plugin&gt;</span></code></pre></div></p>
-
-<p>As we can see, the plugin is loaded by <code>MyPluginLoader</code>:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPluginLoader</span> <span style="color:#66d9ef">implements</span> PluginLoader <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> TaskManagerFactory<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">loadTaskFactories</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// the map describes how to load the plugin
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// with the following statement, you can load the task
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// created by MyFactory using:
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// osmosis --read-pbf latest.osm.pbf --my-plugin
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// you can also create multiple factories that create
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// different tasks if needed
-</span><span style="color:#75715e"></span>        HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> TaskManagerFactory<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
-        map<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;my-plugin&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> MyFactory<span style="color:#f92672">());</span>
-        <span style="color:#66d9ef">return</span> map<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div></p>
-
-<p>The following shows <code>MyFactory</code> that creates the real tasks:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyFactory</span> <span style="color:#66d9ef">extends</span> TaskManagerFactory <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">protected</span> TaskManager <span style="color:#a6e22e">createTaskManagerImpl</span><span style="color:#f92672">(</span>TaskConfiguration taskConfiguration<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// the provided configuration includes the argument you pass to osmosis,
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// which can be used to config the task to be created
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// e.g. if you started osmosis like this:
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// osmosis --read-pbf latest.osm.pbf --my-plugin key=value
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// you can get fetch the passed argument like this:
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// String value = getStringArgument(taskConfiguration, &#34;key&#34;, null);
-</span><span style="color:#75715e"></span>
-        MyTask myTask <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyTask<span style="color:#f92672">();</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> SinkManager<span style="color:#f92672">(</span>taskConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(),</span> myTask<span style="color:#f92672">,</span> taskConfiguration<span style="color:#f92672">.</span><span style="color:#a6e22e">getPipeArgs</span><span style="color:#f92672">());</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div></p>
-
-<p>Now, a simple task that does nothing but print some messages:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTask</span> <span style="color:#66d9ef">implements</span> Sink <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialize</span><span style="color:#f92672">(</span>Map<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> Object<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// initializes resources you need
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;initialize()&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process</span><span style="color:#f92672">(</span>EntityContainer entityContainer<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// processes each entity
-</span><span style="color:#75715e"></span>        Entity entity <span style="color:#f92672">=</span> entityContainer<span style="color:#f92672">.</span><span style="color:#a6e22e">getEntity</span><span style="color:#f92672">();</span>
-        EntityType entityType <span style="color:#f92672">=</span> entity<span style="color:#f92672">.</span><span style="color:#a6e22e">getType</span><span style="color:#f92672">();</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;process(): &#34;</span> <span style="color:#f92672">+</span> entityType<span style="color:#f92672">);</span>
-
-        <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>entityType<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">case</span> Bound:
-                Bound bound <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Bound<span style="color:#f92672">)</span> entity<span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>bound<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> Node:
-                Node node <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Node<span style="color:#f92672">)</span> entity<span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> Way:
-                Way way <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Way<span style="color:#f92672">)</span> entity<span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>way<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">case</span> Relation:
-                Relation relation <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Relation<span style="color:#f92672">)</span> entity<span style="color:#f92672">;</span>
-                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>relation<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">complete</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// makes sure all info is fully persisted
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;complete()&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">release</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// releases resources
-</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;release()&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div></p>
-
-<h2 id="installation">Installation</h2>
-
-<p>Just copy the generated jar to <code>~/.openstreetmap/osmosis/plugins</code> folder.</p>
-
-<h2 id="use-the-plugin">Use the Plugin</h2>
-
-<p>You can now use your plugin: <code>osmosis --read-pbf latest.osm.pbf --my-plugin</code>, and you will get some output like below:
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:39 PM org.openstreetmap.osmosis.core.Osmosis run
-INFO: Osmosis Version <span style="color:#ae81ff">0</span>.42-6-gf39a160-dirty
-Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>release</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// releases resources
+</span><span style=color:#75715e></span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;release()&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span></code></pre></div></p><h2 id=installation>Installation</h2><p>Just copy the generated jar to <code>~/.openstreetmap/osmosis/plugins</code> folder.</p><h2 id=use-the-plugin>Use the Plugin</h2><p>You can now use your plugin: <code>osmosis --read-pbf latest.osm.pbf --my-plugin</code>, and you will get some output like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:39 PM org.openstreetmap.osmosis.core.Osmosis run
+INFO: Osmosis Version <span style=color:#ae81ff>0</span>.42-6-gf39a160-dirty
+Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
 INFO: Preparing pipeline.
-Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
+Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
 INFO: Launching pipeline execution.
-initialize<span style="color:#f92672">()</span>
-Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
-INFO: Pipeline executing, waiting <span style="color:#66d9ef">for</span> completion.
-process<span style="color:#f92672">()</span>: Bound
-Bound<span style="color:#f92672">(</span>top<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span>.2359955, bottom<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span>.2358955, left<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>.7136472, right<span style="color:#f92672">=</span><span style="color:#ae81ff">24</span>.7186472<span style="color:#f92672">)</span>
-process<span style="color:#f92672">()</span>: Node
-Node<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">506188159</span>, <span style="color:#75715e">#tags=0)
-</span><span style="color:#75715e"></span>process<span style="color:#f92672">()</span>: Node
-Node<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">518411565</span>, <span style="color:#75715e">#tags=0)
-</span><span style="color:#75715e"></span>process<span style="color:#f92672">()</span>: Node
-Node<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">2009423577</span>, <span style="color:#75715e">#tags=0)
-</span><span style="color:#75715e"></span>process<span style="color:#f92672">()</span>: Way
-Way<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span><span style="color:#ae81ff">23123806</span>, <span style="color:#75715e">#tags=2)
-</span><span style="color:#75715e"></span>complete<span style="color:#f92672">()</span>
-release<span style="color:#f92672">()</span>
-Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:53 PM org.openstreetmap.osmosis.core.Osmosis run
+initialize<span style=color:#f92672>()</span>
+Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:40 PM org.openstreetmap.osmosis.core.Osmosis run
+INFO: Pipeline executing, waiting <span style=color:#66d9ef>for</span> completion.
+process<span style=color:#f92672>()</span>: Bound
+Bound<span style=color:#f92672>(</span>top<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>.2359955, bottom<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>.2358955, left<span style=color:#f92672>=</span><span style=color:#ae81ff>24</span>.7136472, right<span style=color:#f92672>=</span><span style=color:#ae81ff>24</span>.7186472<span style=color:#f92672>)</span>
+process<span style=color:#f92672>()</span>: Node
+Node<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span><span style=color:#ae81ff>506188159</span>, <span style=color:#75715e>#tags=0)
+</span><span style=color:#75715e></span>process<span style=color:#f92672>()</span>: Node
+Node<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span><span style=color:#ae81ff>518411565</span>, <span style=color:#75715e>#tags=0)
+</span><span style=color:#75715e></span>process<span style=color:#f92672>()</span>: Node
+Node<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span><span style=color:#ae81ff>2009423577</span>, <span style=color:#75715e>#tags=0)
+</span><span style=color:#75715e></span>process<span style=color:#f92672>()</span>: Way
+Way<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span><span style=color:#ae81ff>23123806</span>, <span style=color:#75715e>#tags=2)
+</span><span style=color:#75715e></span>complete<span style=color:#f92672>()</span>
+release<span style=color:#f92672>()</span>
+Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:53 PM org.openstreetmap.osmosis.core.Osmosis run
 INFO: Pipeline complete.
-Oct <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2015</span> <span style="color:#ae81ff">9</span>:05:53 PM org.openstreetmap.osmosis.core.Osmosis run
-INFO: Total execution time: <span style="color:#ae81ff">13088</span> milliseconds.</code></pre></div></p>
-
-<p>Yes, it&rsquo;s that simple to create your own <em>osmosis</em> plugin, and time to hack now!</p>
-
-        
-          <div class="blog-tags">
-            
-              <a href="https://xizzhu.me//tags/osm/">osm</a>&nbsp;
-            
-          </div>
-        
-
-        
-
-        
-          
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://xizzhu.me/posts/2015-06-02-android-ble-bluetooth/" data-toggle="tooltip" data-placement="top" title="BLE on Android">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://xizzhu.me/posts/2016-01-14-chooser-intent-exclude-package/" data-toggle="tooltip" data-placement="top" title="Create Chooser Intent with Packages Excluded">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      
-
-
-      
-
-    </div>
-  </div>
-</div>
-
-    <footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-              <li>
-                <a href="https://github.com/xizzhu" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://linkedin.com/in/xizhizhu" title="LinkedIn">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://stackoverflow.com/users/1664863/xizzhu" title="StackOverflow">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-          
-        </ul>
-        <p class="credits copyright text-muted">
-          
-
-          &nbsp;&bull;&nbsp;&copy;
-          
-            2016
-          
-
-          
-            &nbsp;&bull;&nbsp;
-            <a href="https://xizzhu.me/">Xizhi Zhu</a>
-          
-        </p>
-        <p class="credits theme-by text-muted">
-          Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> heme, hosted by <a href="https://pages.github.com/">GitHub Pages</a>.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://xizzhu.me/js/main.js"></script><script> renderMathInElement(document.body); </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
-<script src="https://xizzhu.me/js/load-photoswipe.js"></script>
-
-
-
-
-
-
-
-
-  </body>
-</html>
-
+Oct <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>2015</span> <span style=color:#ae81ff>9</span>:05:53 PM org.openstreetmap.osmosis.core.Osmosis run
+INFO: Total execution time: <span style=color:#ae81ff>13088</span> milliseconds.</code></pre></div></p><p>Yes, it&rsquo;s that simple to create your own <em>osmosis</em> plugin, and time to hack now!</p><div class=blog-tags><a href=https://xizzhu.me//tags/osm/>osm</a>&nbsp;</div></article><ul class="pager blog-pager"><li class=previous><a href=https://xizzhu.me/posts/2015-06-02-android-ble-bluetooth/ data-toggle=tooltip data-placement=top title="BLE on Android">&larr; Previous Post</a></li><li class=next><a href=https://xizzhu.me/posts/2016-01-14-chooser-intent-exclude-package/ data-toggle=tooltip data-placement=top title="Create Chooser Intent with Packages Excluded">Next Post &rarr;</a></li></ul></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=https://github.com/xizzhu title=GitHub><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://linkedin.com/in/xizhizhu title=LinkedIn><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted">&nbsp;&bull;&nbsp;&copy;
+2016
+&nbsp;&bull;&nbsp;
+<a href=https://xizzhu.me/>Xizhi Zhu</a></p><p class="credits theme-by text-muted">Powered by <a href=https://gohugo.io/>Hugo</a> and <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> heme, hosted by <a href=https://pages.github.com/>GitHub Pages</a>.</p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js integrity=sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1 crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js integrity=sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx crossorigin=anonymous></script><script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script src=https://xizzhu.me/js/main.js></script><script>renderMathInElement(document.body);</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script></body></html>
