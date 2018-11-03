@@ -6,10 +6,20 @@
     <description>Recent content in Home on Xizhi Zhu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Sep 2016 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2015 00:00:00 -0800</lastBuildDate>
     
 	<atom:link href="https://xizzhu.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>有信仰的孩子，真的就更自私吗？</title>
+      <link>https://xizzhu.me/%E9%9A%8F%E7%AC%94/2015-11-08-%E4%BF%A1%E4%BB%B0-%E8%87%AA%E7%A7%81/</link>
+      <pubDate>Sun, 08 Nov 2015 00:00:00 -0800</pubDate>
+      
+      <guid>https://xizzhu.me/%E9%9A%8F%E7%AC%94/2015-11-08-%E4%BF%A1%E4%BB%B0-%E8%87%AA%E7%A7%81/</guid>
+      <description>&lt;p&gt;英国&lt;a href=&#34;https://www.theguardian.com/world/2015/nov/06/religious-children-less-altruistic-secular-kids-study&#34;&gt;卫报&lt;/a&gt;引用一项研究称，和没有信仰的无神论孩子相比，有宗教信仰的孩子们更加自私。这好像和我们的认知恰好相反，难道说，宗教信仰真是有害的吗？让我们看一看这项研究的数据先。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Wrapping Existing Code With RxJava</title>
