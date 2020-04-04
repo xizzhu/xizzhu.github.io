@@ -1,0 +1,145 @@
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Effective Kotlin: Creating and Destroying Objects - Xizhi Zhu</title><meta name=description content="Let&rsquo;s see how we can apply Joshua Bloch&rsquo;s Effective Java in the Kotlin world, starting with Creating and Destroying Objects."><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Xizhi Zhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2020-04-03-effective-kotlin-create-destroy-object\/","name":"Effective kotlin creating and destroying objects"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":""},"headline":"Effective Kotlin: Creating and Destroying Objects","description":"Let\x26rsquo;s see how we can apply Joshua Bloch\x26rsquo;s Effective Java in the Kotlin world, starting with Creating and Destroying Objects.\n","inLanguage":"en","wordCount":927,"datePublished":"2020-04-03T00:00:00","dateModified":"2020-04-03T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["kotlin, effective kotlin"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2020-04-03-effective-kotlin-create-destroy-object\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script><meta property="og:title" content="Effective Kotlin: Creating and Destroying Objects"><meta property="og:description" content="Let&rsquo;s see how we can apply Joshua Bloch&rsquo;s Effective Java in the Kotlin world, starting with Creating and Destroying Objects."><meta property="og:image" content="https://xizzhu.me/images/logo.png"><meta property="og:url" content="https://xizzhu.me/post/2020-04-03-effective-kotlin-create-destroy-object/"><meta property="og:type" content="website"><meta property="og:site_name" content="Xizhi Zhu"><meta name=twitter:title content="Effective Kotlin: Creating and Destroying Objects"><meta name=twitter:description content="Let&rsquo;s see how we can apply Joshua Bloch&rsquo;s Effective Java in the Kotlin world, starting with Creating and Destroying Objects."><meta name=twitter:image content="https://xizzhu.me/images/logo.png"><meta name=twitter:card content="summary"><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta name=generator content="Hugo 0.68.3"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title="Xizhi Zhu"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-128400000-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=https://xizzhu.me/>Xizhi Zhu</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=Posts href=/post>Posts</a></li><li><a title=Bible href=/bible>Bible</a></li><li><a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title="Xizhi Zhu" href=https://xizzhu.me/><img class=avatar-img src=https://xizzhu.me/images/logo.png alt="Xizhi Zhu"></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Effective Kotlin: Creating and Destroying Objects</h1><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on April 3, 2020
+&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p>Let&rsquo;s see how we can apply Joshua Bloch&rsquo;s <a href=https://www.amazon.com/gp/product/0134685997/>Effective Java</a> in the Kotlin world, starting with Creating and Destroying Objects.</p><h3 id=item-1-consider-static-factory-methods-instead-of-constructors>Item 1: Consider static factory methods instead of constructors</h3><p>In Kotlin, we can e.g. use the <strong>companion object</strong> to achieve this:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyFragment</span> {
+  <span style=color:#66d9ef>companion</span> <span style=color:#66d9ef>object</span> {
+    <span style=color:#75715e>// add @JvmStatic annotation to turn them into static methods if needed
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>newInstance</span>(arg1: Int, arg2: String) {
+      ...
+    }
+  }
+}</code></pre></div></p><p>Or we can simply use a <strong>function</strong>, like those in the Kotlin standard libraries, e.g.:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>fun</span> &lt;T&gt; <span style=color:#a6e22e>listOf</span>(<span style=color:#66d9ef>vararg</span> elements: T): List&lt;T&gt; {
+   ...
+}</code></pre></div></p><h3 id=item-2-consider-a-builder-when-faced-with-many-constructor-parameters>Item 2: Consider a builder when faced with many constructor parameters</h3><p>For constructors or functions written in Kotlin, we can simply use <strong>named parameters</strong>. For example, if your <code>Widget</code> class has a constructor that accepts four integer arguments:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Widget</span>(x: Int, y: Int, width: Int, height: Int) {
+  ...
+}</code></pre></div></p><p>You can call it like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>val</span> widget = Widget(
+  x = <span style=color:#ae81ff>12</span>,
+  y = <span style=color:#ae81ff>34</span>,
+  width = <span style=color:#ae81ff>56</span>,
+  height = <span style=color:#ae81ff>78</span>
+)</code></pre></div></p><p>Or we can create a simple <a href=https://kotlinlang.org/docs/reference/type-safe-builders.html><strong>DSL</strong></a> like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Name</span>(<span style=color:#66d9ef>var</span> firstName: String, <span style=color:#66d9ef>var</span> lastName: String = <span style=color:#e6db74>&#34;&#34;</span>)
+
+<span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserInfo</span>(<span style=color:#66d9ef>val</span> name: Name = Name(<span style=color:#e6db74>&#34;&#34;</span>), <span style=color:#66d9ef>var</span> password: String = <span style=color:#e6db74>&#34;&#34;</span>) {
+  <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>name</span>(block: Name.() -&gt; Unit) = name.block()
+}
+
+<span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>userInfo</span>(block: UserInfo.() -&gt; Unit): UserInfo = UserInfo().apply(block)
+
+<span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>main</span>() {
+  <span style=color:#66d9ef>val</span> user = userInfo {
+    name {
+      firstName = <span style=color:#e6db74>&#34;Xizhi&#34;</span>
+      lastName = <span style=color:#e6db74>&#34;Zhu&#34;</span>
+    }
+    password = <span style=color:#e6db74>&#34;super secure password&#34;</span>
+  }
+}</code></pre></div></p><h3 id=item-3-enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type>Item 3: Enforce the singleton property with a private constructor or an enum type</h3><p>Kotlin provides a built-in way to create a singleton by using the <code>object</code> keyword:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>object</span> <span style=color:#a6e22e>Singleton</span> {
+  <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>myFunction</span>() {
+    ...
+  }
+}
+
+Singleton.myFunction()</code></pre></div></p><h3 id=item-4-enforce-noninstantiability-with-a-private-constructor>Item 4: Enforce noninstantiability with a private constructor</h3><p>In Kotlin, you can just use <strong>top-level functions</strong> to achieve this. For example, the standard library has a bunch of utility functions to create lists:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// creates an empty read-only list
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>fun</span> &lt;T&gt; <span style=color:#a6e22e>emptyList</span>(): List&lt;T&gt; = EmptyList
+
+<span style=color:#75715e>// creates a read-only list containing the given elements
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>fun</span> &lt;T&gt; <span style=color:#a6e22e>listOf</span>(<span style=color:#66d9ef>vararg</span> elements: T): List&lt;T&gt; =
+  <span style=color:#66d9ef>if</span> (elements.size &gt; <span style=color:#ae81ff>0</span>) elements.asList() <span style=color:#66d9ef>else</span> emptyList()
+
+<span style=color:#75715e>// creates an empty mutable list
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>inline</span> <span style=color:#66d9ef>fun</span> &lt;T&gt; <span style=color:#a6e22e>mutableListOf</span>(): MutableList&lt;T&gt; = ArrayList()</code></pre></div></p><h3 id=item-5-prefer-dependency-injection-to-hardwiring-resources>Item 5: Prefer dependency injection to hardwiring resources</h3><p>There isn&rsquo;t anything special for Kotlin for this item, keep using <a href=https://github.com/google/dagger/>Dagger</a> or any other <a href=https://en.wikipedia.org/wiki/Dependency_injection>dependency injection</a> tools you prefer.</p><h3 id=item-6-avoid-creating-unnecessary-objects>Item 6: Avoid creating unnecessary objects</h3><p>Here&rsquo;re just some of the scenarios, far from an exhaustive list.</p><h4 id=primitive-types>Primitive types</h4><p>When using &ldquo;primitive types&rdquo;, try to <strong>avoid nullable types</strong>, because non-nullable types like <code>Int</code> will be translated to primitive types like <code>int</code>, but nullable types like <code>Int?</code> will be translated to boxed types like <code>Integer</code>.</p><p>Similarly, choose primitive type arrays over the generic one, because <code>IntArray</code> will be translated to <code>int[]</code>, but <code>Array&lt;Int></code> will be translated to <code>Integer[]</code>.</p><h4 id=iterations>Iterations</h4><p>The basic for-loops are optimized with zero overhead. For example:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>0.</span>.<span style=color:#ae81ff>10</span>) {
+  println(i)
+}
+
+<span style=color:#75715e>// The above Kotlin code will be translated to:
+</span><span style=color:#75715e></span>int i = <span style=color:#ae81ff>0</span>;
+
+<span style=color:#66d9ef>for</span>(byte var1 = <span style=color:#ae81ff>10</span>; i &lt;= var1; ++i) {
+  boolean var2 = <span style=color:#66d9ef>false</span>;
+  System.<span style=color:#66d9ef>out</span>.println(i);
+}</code></pre></div></p><p>It&rsquo;s the same for <code>downTo</code> and <code>until</code>. However, it gets ugly when you apply <code>step</code> there:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>for</span> (i <span style=color:#66d9ef>in</span> <span style=color:#ae81ff>0.</span>.<span style=color:#ae81ff>10</span> step <span style=color:#ae81ff>2</span>) {
+  println(i)
+}
+
+<span style=color:#75715e>// The above Kotlin code will be translated to:
+</span><span style=color:#75715e></span>byte var3 = <span style=color:#ae81ff>0</span>;
+IntProgression var10000 = RangesKt.step((IntProgression)(new IntRange(var3, <span style=color:#ae81ff>10</span>)), <span style=color:#ae81ff>2</span>);
+int i = var10000.getFirst();
+int var1 = var10000.getLast();
+int var2 = var10000.getStep();
+<span style=color:#66d9ef>if</span> (var2 &gt;= <span style=color:#ae81ff>0</span>) {
+  <span style=color:#66d9ef>if</span> (i &gt; var1) {
+    <span style=color:#66d9ef>return</span>;
+  }
+} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i &lt; var1) {
+  <span style=color:#66d9ef>return</span>;
+}
+
+<span style=color:#66d9ef>while</span>(<span style=color:#66d9ef>true</span>) {
+  boolean var4 = <span style=color:#66d9ef>false</span>;
+  System.<span style=color:#66d9ef>out</span>.println(i);
+  <span style=color:#66d9ef>if</span> (i == var1) {
+    <span style=color:#66d9ef>return</span>;
+  }
+
+  i += var2;
+}</code></pre></div></p><p>On the other hand, if you use <code>forEach</code>, you&rsquo;ll see it&rsquo;s will be translated into more complicated code than the basic for-loops:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>(<span style=color:#ae81ff>0.</span>.<span style=color:#ae81ff>10</span>).forEach {
+  println(it)
+}
+
+<span style=color:#75715e>// The above Kotlin code will be translated to:
+</span><span style=color:#75715e></span>byte var0 = <span style=color:#ae81ff>0</span>;
+Iterable <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#66d9ef>this</span><span style=color:#960050;background-color:#1e0010>$</span>forEach<span style=color:#960050;background-color:#1e0010>$</span>iv = (Iterable)(new IntRange(var0, <span style=color:#ae81ff>10</span>));
+int <span style=color:#960050;background-color:#1e0010>$</span>i<span style=color:#960050;background-color:#1e0010>$</span>f<span style=color:#960050;background-color:#1e0010>$</span>forEach = <span style=color:#66d9ef>false</span>;
+Iterator var2 = <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#66d9ef>this</span><span style=color:#960050;background-color:#1e0010>$</span>forEach<span style=color:#960050;background-color:#1e0010>$</span>iv.iterator();
+
+<span style=color:#66d9ef>while</span>(var2.hasNext()) {
+  int element<span style=color:#960050;background-color:#1e0010>$</span>iv = ((IntIterator)var2).nextInt();
+  int var5 = <span style=color:#66d9ef>false</span>;
+  boolean var6 = <span style=color:#66d9ef>false</span>;
+  System.<span style=color:#66d9ef>out</span>.println(element<span style=color:#960050;background-color:#1e0010>$</span>iv);
+}</code></pre></div></p><h4 id=lambda>Lambda</h4><p>As expected, lambda comes with a cost, for example:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>higherOrderFunction</span>(f: () -&gt; Unit) {
+    f()
+}
+
+<span style=color:#75715e>// And you use it like this:
+</span><span style=color:#75715e></span><span style=color:#66d9ef>val</span> a = <span style=color:#ae81ff>0</span>
+higherOrderFunction {
+  println(a)
+}</code></pre></div></p><p>The code that calls the higher order function will be translated to something below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>final</span> int a = <span style=color:#ae81ff>0</span>;
+higherOrderFunction((Function0)(new Function0() {
+  <span style=color:#75715e>// $FF: synthetic method
+</span><span style=color:#75715e></span>  <span style=color:#75715e>// $FF: bridge method
+</span><span style=color:#75715e></span>  <span style=color:#66d9ef>public</span> Object invoke() {
+    <span style=color:#66d9ef>this</span>.invoke();
+    <span style=color:#66d9ef>return</span> Unit.INSTANCE;
+  }
+
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> void invoke() {
+    int var1 = a;
+    boolean var2 = <span style=color:#66d9ef>false</span>;
+    System.<span style=color:#66d9ef>out</span>.println(var1);
+  }
+}));</code></pre></div></p><p>To optimize this, you can <a href=https://kotlinlang.org/docs/reference/inline-functions.html>inline</a> the function, then the calling code will become this:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>int a = <span style=color:#ae81ff>0</span>;
+int <span style=color:#960050;background-color:#1e0010>$</span>i<span style=color:#960050;background-color:#1e0010>$</span>f<span style=color:#960050;background-color:#1e0010>$</span>higherOrderFunction = <span style=color:#66d9ef>false</span>;
+int var2 = <span style=color:#66d9ef>false</span>;
+boolean var4 = <span style=color:#66d9ef>false</span>;
+System.<span style=color:#66d9ef>out</span>.println(a);</code></pre></div></p><h3 id=item-7-eliminate-obsolete-object-references>Item 7: Eliminate obsolete object references</h3><p>There isn’t anything special for Kotlin for this item. <strong>Always</strong> remember to nullify references which are no longer needed.</p><h3 id=item-8-avoid-finalizers-and-cleaners>Item 8: Avoid finalizers and cleaners</h3><p>Actually, Kotlin&rsquo;s <code>Any</code> class does <strong>NOT</strong> provide a <code>finalize()</code> method (though you can still <a href=https://kotlinlang.org/docs/reference/java-interop.html#finalize>override</a> it). Please refer to Item 9 on how to release non-memory resources in Kotlin.</p><h3 id=item-9-prefer-try-with-resources-to-try-finally>Item 9: Prefer try-with-resources to try-finally</h3><p>There is no try-with-resources in Kotlin, but we can use the <code>use()</code> extension function for this purpose.</p><p>To release non-memory resources in Kotlin, just have your class implement <code>AutoCloseable</code>, and requires its client to use the <code>use()</code> extension function:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyClass</span>: AutoCloseable {
+  <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>close</span>() {
+    ...
+  }
+}
+
+<span style=color:#75715e>// You can use it like this to ensure close() is called:
+</span><span style=color:#75715e></span>MyClass().use {
+  ...
+}</code></pre></div></p><div class=blog-tags><a href=https://xizzhu.me//tags/kotlin/>kotlin</a>&nbsp;
+<a href=https://xizzhu.me//tags/effective-kotlin/>effective kotlin</a>&nbsp;</div><hr><section id=social-share><div class="list-inline footer-links"><div class=share-box aria-hidden=true><ul class=share><li><a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f&text=Effective%20Kotlin%3a%20Creating%20and%20Destroying%20Objects&via=" target=_blank title="Share on Twitter"><i class="fab fa-twitter"></i></a></li><li><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f" target=_blank title="Share on Facebook"><i class="fab fa-facebook"></i></a></li><li><a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f&title=Effective%20Kotlin%3a%20Creating%20and%20Destroying%20Objects" target=_blank title="Share on Reddit"><i class="fab fa-reddit"></i></a></li><li><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f&title=Effective%20Kotlin%3a%20Creating%20and%20Destroying%20Objects" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a></li><li><a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f&title=Effective%20Kotlin%3a%20Creating%20and%20Destroying%20Objects" target=_blank title="Share on StumbleUpon"><i class="fab fa-stumbleupon"></i></a></li><li><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-04-03-effective-kotlin-create-destroy-object%2f&description=Effective%20Kotlin%3a%20Creating%20and%20Destroying%20Objects" target=_blank title="Share on Pinterest"><i class="fab fa-pinterest"></i></a></li></ul></div></div></section><h4 class=see-also>See also</h4><ul><li><a href=/post/2019-12-09-kotlin-coroutine-flow/>Kotlin Coroutines: Flows</a></li><li><a href=/post/2019-05-24-kotlin-coroutine-structured-concurrency/>Kotlin Coroutines: Structured Concurrency</a></li><li><a href=/post/2019-05-23-kotlin-coroutine/>Kotlin Coroutines: The Basics</a></li><li><a href=/post/2019-04-03-kotlin-standard-functions-let-apply-also-run-with/>Kotlin Standard Functions: apply, also, let, with, and run</a></li></ul></article><ul class="pager blog-pager"><li class=previous><a href=https://xizzhu.me/post/2019-12-09-kotlin-coroutine-flow/ data-toggle=tooltip data-placement=top title="Kotlin Coroutines: Flows">&larr; Previous Post</a></li></ul></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=https://github.com/xizzhu title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://linkedin.com/in/xizhizhu title=LinkedIn><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted">&nbsp;&bull;&nbsp;&copy;
+2020
+&nbsp;&bull;&nbsp;
+<a href=https://xizzhu.me/>Xizhi Zhu</a></p><p class="credits theme-by text-muted">Powered by <a href=https://gohugo.io/>Hugo</a> and <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> heme, hosted by <a href=https://pages.github.com/>GitHub Pages</a>.</p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script><script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script src=https://xizzhu.me/js/main.js></script><script>renderMathInElement(document.body);</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script></body></html>
