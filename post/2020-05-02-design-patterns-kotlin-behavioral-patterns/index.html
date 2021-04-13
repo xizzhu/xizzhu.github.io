@@ -1,11 +1,11 @@
-<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Design Patterns in Kotlin: Behavioral Patterns - Xizhi Zhu</title><meta name=description content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Xizhi Zhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2020-05-02-design-patterns-kotlin-behavioral-patterns\/","name":"Design patterns in kotlin behavioral patterns"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":""},"headline":"Design Patterns in Kotlin: Behavioral Patterns","description":"Gang of Four\u0026rsquo;s Behavioral Patterns describe the way of communications between objects.\n","inLanguage":"en","wordCount":1282,"datePublished":"2020-05-02T00:00:00","dateModified":"2020-05-02T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["kotlin, design patterns"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2020-05-02-design-patterns-kotlin-behavioral-patterns\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script><meta property="og:title" content="Design Patterns in Kotlin: Behavioral Patterns"><meta property="og:description" content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><meta property="og:image" content="https://xizzhu.me/images/logo.png"><meta property="og:url" content="https://xizzhu.me/post/2020-05-02-design-patterns-kotlin-behavioral-patterns/"><meta property="og:type" content="website"><meta property="og:site_name" content="Xizhi Zhu"><meta name=twitter:title content="Design Patterns in Kotlin: Behavioral Patterns"><meta name=twitter:description content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><meta name=twitter:image content="https://xizzhu.me/images/logo.png"><meta name=twitter:card content="summary"><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta name=generator content="Hugo 0.80.0"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title="Xizhi Zhu"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-128400000-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Design Patterns in Kotlin: Behavioral Patterns - Xizhi Zhu</title><meta name=description content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Xizhi Zhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2020-05-02-design-patterns-kotlin-behavioral-patterns\/","name":"Design patterns in kotlin behavioral patterns"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":""},"headline":"Design Patterns in Kotlin: Behavioral Patterns","description":"Gang of Four\u0026rsquo;s Behavioral Patterns describe the way of communications between objects.\n","inLanguage":"en","wordCount":1282,"datePublished":"2020-05-02T00:00:00","dateModified":"2020-05-02T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["kotlin, design patterns"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2020-05-02-design-patterns-kotlin-behavioral-patterns\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script><meta property="og:title" content="Design Patterns in Kotlin: Behavioral Patterns"><meta property="og:description" content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><meta property="og:image" content="https://xizzhu.me/images/logo.png"><meta property="og:url" content="https://xizzhu.me/post/2020-05-02-design-patterns-kotlin-behavioral-patterns/"><meta property="og:type" content="website"><meta property="og:site_name" content="Xizhi Zhu"><meta name=twitter:title content="Design Patterns in Kotlin: Behavioral Patterns"><meta name=twitter:description content="Gang of Four&rsquo;s Behavioral Patterns describe the way of communications between objects."><meta name=twitter:image content="https://xizzhu.me/images/logo.png"><meta name=twitter:card content="summary"><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta name=generator content="Hugo 0.75.1"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title="Xizhi Zhu"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-128400000-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
 <a class=navbar-brand href=https://xizzhu.me/>Xizhi Zhu</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=Posts href=/post>Posts</a></li><li><a title=Bible href=/bible>Bible</a></li><li><a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title="Xizhi Zhu" href=https://xizzhu.me/><img class=avatar-img src=https://xizzhu.me/images/logo.png alt="Xizhi Zhu"></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Design Patterns in Kotlin: Behavioral Patterns</h1><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Design Patterns in Kotlin: Behavioral Patterns</h1><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on May 2, 2020
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p>Gang of Four&rsquo;s Behavioral Patterns describe the way of <strong>communications between objects</strong>.</p><h3 id=1-chain-of-responsibility>1. Chain of Responsibility</h3><p>Now in one of the car parts factories, there might be one or more assembly lines. When an order arrives, the factory needs to dispatch operations to one of the assembly lines.</p><p>Instead of iterating over all the assembly lines each time, we can use the <strong>chain of responsibility pattern</strong>, where each assembly line will try to fulfill the request, or further forward it to its successor.</p><p>We can design the classes like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ChainedAssemblyLine</span>(
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> nextAssemblyLine: ChainedAssemblyLine?
 ) : AssemblyLine {
@@ -19,75 +19,75 @@
         <span style=color:#75715e>// execute the operation
 </span><span style=color:#75715e></span>    }
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#75715e>// the factory can act as if there is just one assembly line
 </span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span> : CarPartsFactory {
-    <span style=color:#66d9ef>private</span> assemblyLine: AssemblyLine = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> assemblyLine: AssemblyLine = ...
 
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire {
         assemblyLine.doOperationA()
 
-        <span style=color:#f92672>..</span>.
+        ...
     }
     
-    <span style=color:#f92672>..</span>.
+    ...
 }</code></pre></div></p><h3 id=2-command>2. Command</h3><p>Suppose the assembly line needs to provide transactional support that when one operation fails, the others shall be rolled back. However, only the car parts factory knows which operations should be grouped to form a transaction.</p><p>The <strong>command pattern</strong> can be used in this case to encapsulate the actions.</p><p>The classes can be extended as below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>AssemblyLine</span> {
-    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doTransaction</span>(block: AssemblyLine.() <span style=color:#f92672>-&gt;</span> Unit)
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doTransaction</span>(block: AssemblyLine.() -&gt; Unit)
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span> : CarPartsFactory {
-    <span style=color:#66d9ef>private</span> assemblyLine: AssemblyLine = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> assemblyLine: AssemblyLine = ...
 
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire {
         <span style=color:#75715e>// run the transaction here
 </span><span style=color:#75715e></span>        assemblyLine.doTransaction {
            doOperationA()
            doOperationB()
-           <span style=color:#f92672>..</span>.
+           ...
         }
 
-        <span style=color:#f92672>..</span>.
+        ...
     }
     
-    <span style=color:#f92672>..</span>.
+    ...
 }</code></pre></div></p><h3 id=3-interpreter>3. Interpreter</h3><p>Now suppose the car parts factory wants to try different assembly line operations to make tires. One way to achieve this is to define a simple language so that the operators can specify the operations to be carried out.</p><p>The <strong>interpreter pattern</strong> provides a way to support this use case.</p><h3 id=4-iterator>4. Iterator</h3><p>Remember the <code>CompositeAssemblyLine</code> class that holds a list of assembly lines? Now that a car parts factory wants to iterate through the assembly lines, but the composite assembly line doesn&rsquo;t want to expose how those lines are represented internally.</p><p>To achieve this, we can use the <strong>iterator pattern</strong> like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CompositeAssemblyLine</span>: AssemblyLine {
-    <span style=color:#66d9ef>private</span> subAssemblyLines: List&lt;AssemblyLine&gt; = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> subAssemblyLines: List&lt;AssemblyLine&gt; = ...
 
     <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>assemblyLinesIterator</span>(): Iterator&lt;AssemblyLine&gt;
         = subAssemblyLines.iterator()
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span>: CarPartsFactory() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> assemblyLine: CompositeAssemblyLine = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> assemblyLine: CompositeAssemblyLine = ...
 
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>randomFunction</span>() {
         <span style=color:#75715e>// the client can easily iterate, and doesn&#39;t need to
 </span><span style=color:#75715e></span>        <span style=color:#75715e>// know anything of the internal representations
 </span><span style=color:#75715e></span>        assemblyLine.assemblyLinesIterator.forEach {
-            <span style=color:#f92672>..</span>.
+            ...
         }
     }
 
-    <span style=color:#f92672>..</span>.
+    ...
 }</code></pre></div></p><h3 id=5-mediator>5. Mediator</h3><p>Now that the car manufacturer is improving its car parts factories that they can talk to each other. However, this is creating a many-to-many relationships, which are difficult to understand and maintain.</p><p>To solve this problem, we can use the <strong>mediator pattern</strong> to simplify the interactions among the objects.</p><p>We can update the manufacturer as the mediator, taking care managing the interactions:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarManufacturer</span> {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> carPartsFactories: List&lt;CarPartsFactory&gt; = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> carPartsFactories: List&lt;CarPartsFactory&gt; = ...
 
     <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>requestOperationA</span>() {
         <span style=color:#75715e>// forwards the message to a peer
 </span><span style=color:#75715e></span>        carPartsFactories.firstOrNull()<span style=color:#f92672>?.</span>doOperationA()
     }
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span>: CarPartsFactory() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> manufacturer: CarManufacturer = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> manufacturer: CarManufacturer = ...
 
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>randomFunction</span>() {
         <span style=color:#75715e>// instead of directly talking to other peers, it talks
@@ -95,10 +95,10 @@
 </span><span style=color:#75715e></span>        manufacturer.requestOperationA()
     }
 }</code></pre></div></p><h3 id=6-memento>6. Memento</h3><p>For the assembly line, one way to support rollback when any operation fails during a transaction, is to remember the state before the transaction happens, and revert the object back to that state.</p><p>The <strong>memento pattern</strong> provides such an ability.</p><p>We can design the assembly line and related classes like below:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AssemblyLine</span> {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>State</span>(<span style=color:#f92672>..</span>.)
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>State</span>(...)
 
     <span style=color:#75715e>// ignored synchronization for the sake of simplicity
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doTransaction</span>(block: () <span style=color:#f92672>-&gt;</span> Unit) {
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doTransaction</span>(block: () -&gt; Unit) {
         <span style=color:#75715e>// records the internal state
 </span><span style=color:#75715e></span>        <span style=color:#66d9ef>val</span> state: State = currentState()
         <span style=color:#66d9ef>try</span> {
@@ -110,21 +110,21 @@
         }
     }
 
-    <span style=color:#f92672>..</span>.
+    ...
 }</code></pre></div></p><h3 id=7-observer>7. Observer</h3><p>Now suppose the car parts factory needs to send some messages to its assembly lines every now and then. The <strong>observer pattern</strong> can be used in this case.<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>AssemblyLine</span> {
     <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onEvent</span>(event: Event)
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span> : CarPartsFactory {
-    <span style=color:#66d9ef>private</span> assemblyLines: List&lt;AssemblyLine&gt; = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> assemblyLines: List&lt;AssemblyLine&gt; = ...
 
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>notifyAssemblyLines</span>(event: Event) {
-        assemblyLines.forEach { <span style=color:#66d9ef>it</span>.onEvent(event) }
+        assemblyLines.forEach { it.onEvent(event) }
     }
     
-    <span style=color:#f92672>..</span>.
+    ...
 }</code></pre></div></p><h3 id=8-state>8. State</h3><p>Now that one of the assembly lines behaves differently when its internal state is changed.</p><p>Instead of writing lots if <code>if-else</code> or <code>when</code> statements in different places, we can also use the <strong>state pattern</strong>. It creates different classes to be used in different states, e.g.:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StatefulAssemblyLine</span> : AssemblyLine {
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> assemblyLine: State = State.Uninitialized()
 
@@ -136,30 +136,30 @@
         <span style=color:#75715e>// this will be the only place where we have conditional statements
 </span><span style=color:#75715e></span>        <span style=color:#66d9ef>when</span> (state) {
             <span style=color:#66d9ef>is</span> State.StateA: assemblyLine = State.StateA()
-            <span style=color:#f92672>..</span>.
+            ...
         }
     }
 
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>sealed</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>State</span>: AssemblyLine {
-        <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Uninitialized</span> : State { <span style=color:#f92672>..</span>. }
-        <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StateA</span>: State { <span style=color:#f92672>..</span>. }
+        <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Uninitialized</span> : State { ... }
+        <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StateA</span>: State { ... }
     }
 
-    <span style=color:#f92672>....</span>
-}</code></pre></div></p><h3 id=9-strategy>9. Strategy</h3><p>The car manufacturer has developed different algorithms to produce tires in different scenarios. The <strong>strategy pattern</strong> provides a way to select the algorithm flexibly at runtime.<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>abstract</span> AbstractCarPartsFactory : CarPartsFactory { <span style=color:#f92672>..</span>. }
+    ....
+}</code></pre></div></p><h3 id=9-strategy>9. Strategy</h3><p>The car manufacturer has developed different algorithms to produce tires in different scenarios. The <strong>strategy pattern</strong> provides a way to select the algorithm flexibly at runtime.<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>abstract</span> AbstractCarPartsFactory : CarPartsFactory { ... }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span> : AbstractCarPartsFactory {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire { <span style=color:#f92672>..</span>. }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire { ... }
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryB</span> : AbstractCarPartsFactory {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire { <span style=color:#f92672>..</span>. }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire { ... }
 }
 
 <span style=color:#75715e>// the client needs to specify the car parts factory to be used
 </span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarManufacturerA</span>(
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> carPartsFactory: CarPartsFactory
-) : CarManufacturer { <span style=color:#f92672>..</span>. }</code></pre></div></p><p>Alternatively, we can use higher-order functions instead of subclassing:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StrategyCarPartsFactory</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> createTire: () <span style=color:#f92672>-&gt;</span> Tire) : CarPartsFactory {
+) : CarManufacturer { ... }</code></pre></div></p><p>Alternatively, we can use higher-order functions instead of subclassing:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>StrategyCarPartsFactory</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> createTire: () -&gt; Tire) : CarPartsFactory {
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire = createTire()
 }</code></pre></div></p><h3 id=10-template-method>10. Template Method</h3><p>Now that one of the algorithms the car manufacturer developed can be split into several parts, some are identical, and some are different.</p><p>The <strong>template method pattern</strong> can be used here. It provides a way to vary part of an algorithm.<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// the base class implements the template for the algorithm
 </span><span style=color:#75715e></span><span style=color:#66d9ef>abstract</span> AbstractCarPartsFactory : CarPartsFactory {
@@ -175,23 +175,23 @@
     <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart2</span>()
     <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart3</span>()
 
-    <span style=color:#f92672>..</span>.
+    ...
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryA</span> : AbstractCarPartsFactory {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart1</span>() { <span style=color:#f92672>..</span>. }
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart2</span>() { <span style=color:#f92672>..</span>. }
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart3</span>() { <span style=color:#f92672>..</span>. }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart1</span>() { ... }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart2</span>() { ... }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart3</span>() { ... }
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CarPartsFactoryB</span> : AbstractCarPartsFactory {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart1</span>() { <span style=color:#f92672>..</span>. }
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart2</span>() { <span style=color:#f92672>..</span>. }
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart3</span>() { <span style=color:#f92672>..</span>. }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart1</span>() { ... }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart2</span>() { ... }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>differentPart3</span>() { ... }
 }</code></pre></div></p><p>Alternatively, we can use higher-order functions instead of subclassing:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TemplateCarPartsFactory</span>(
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart1: () <span style=color:#f92672>-&gt;</span> Unit,
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart2: () <span style=color:#f92672>-&gt;</span> Unit,
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart3s: () <span style=color:#f92672>-&gt;</span> Unit
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart1: () -&gt; Unit,
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart2: () -&gt; Unit,
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> differentPart3s: () -&gt; Unit
 ) : CarPartsFactory {
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>produceTire</span>(): Tire {
         commonPart1()
@@ -209,11 +209,11 @@
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Tire</span>: CarElement {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> subElements: List&lt;CarElement&gt; = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> subElements: List&lt;CarElement&gt; = ...
 
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>accept</span>(carElementVisitor: CarElementVisitor) {
         <span style=color:#75715e>// each element makes sure sub-elements are visited
-</span><span style=color:#75715e></span>        subElements { <span style=color:#66d9ef>it</span>.accept(carElementVisitor) }
+</span><span style=color:#75715e></span>        subElements { it.accept(carElementVisitor) }
 
         <span style=color:#75715e>// also itself is visited
 </span><span style=color:#75715e></span>        carElementVisitor.visit(<span style=color:#66d9ef>this</span>)
@@ -221,15 +221,15 @@
 }
 
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Engine</span>: CarElement {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>accept</span>(carElementVisitor: CarElementVisitor) { <span style=color:#f92672>..</span>. }
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>accept</span>(carElementVisitor: CarElementVisitor) { ... }
 }
 
 <span style=color:#75715e>// makes it easy for the client to use
 </span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Car</span>: CarElement {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> elements: List&lt;CarElement&gt; = <span style=color:#f92672>..</span>.
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> elements: List&lt;CarElement&gt; = ...
 
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>accept</span>(carElementVisitor: CarElementVisitor) {
-        elements { <span style=color:#66d9ef>it</span>.accept(carElementVisitor) }
+        elements { it.accept(carElementVisitor) }
         carElementVisitor.visit(<span style=color:#66d9ef>this</span>)
     }
 }
@@ -237,7 +237,7 @@
 <span style=color:#75715e>// the client can use it like below
 </span><span style=color:#75715e></span>car.accept(<span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>CarElementVisitor</span> {
     <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>visit</span>(carElement: CarElement) {
-        <span style=color:#f92672>..</span>.
+        ...
     }
 })</code></pre></div></p><div class=blog-tags><a href=https://xizzhu.me//tags/kotlin/>kotlin</a>&nbsp;
 <a href=https://xizzhu.me//tags/design-patterns/>design patterns</a>&nbsp;</div><hr><section id=social-share><div class="list-inline footer-links"><div class=share-box aria-hidden=true><ul class=share><li><a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f&text=Design%20Patterns%20in%20Kotlin%3a%20Behavioral%20Patterns&via=" target=_blank title="Share on Twitter"><i class="fab fa-twitter"></i></a></li><li><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f" target=_blank title="Share on Facebook"><i class="fab fa-facebook"></i></a></li><li><a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f&title=Design%20Patterns%20in%20Kotlin%3a%20Behavioral%20Patterns" target=_blank title="Share on Reddit"><i class="fab fa-reddit"></i></a></li><li><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f&title=Design%20Patterns%20in%20Kotlin%3a%20Behavioral%20Patterns" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a></li><li><a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f&title=Design%20Patterns%20in%20Kotlin%3a%20Behavioral%20Patterns" target=_blank title="Share on StumbleUpon"><i class="fab fa-stumbleupon"></i></a></li><li><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-02-design-patterns-kotlin-behavioral-patterns%2f&description=Design%20Patterns%20in%20Kotlin%3a%20Behavioral%20Patterns" target=_blank title="Share on Pinterest"><i class="fab fa-pinterest"></i></a></li></ul></div></div></section><h4 class=see-also>See also</h4><ul><li><a href=/post/2020-06-06-kotlin-generics/>Understanding Generics in Kotlin</a></li><li><a href=/post/2020-04-27-design-patterns-kotlin-structural-patterns/>Design Patterns in Kotlin: Structural Patterns</a></li><li><a href=/post/2020-04-25-design-patterns-kotlin-creational-patterns/>Design Patterns in Kotlin: Creational Patterns</a></li><li><a href=/post/2020-04-24-effective-kotlin-serialization/>Effective Kotlin: Serialization</a></li><li><a href=/post/2020-04-23-effective-kotlin-concurrency/>Effective Kotlin: Concurrency</a></li></ul></article><ul class="pager blog-pager"><li class=previous><a href=https://xizzhu.me/post/2020-04-27-design-patterns-kotlin-structural-patterns/ data-toggle=tooltip data-placement=top title="Design Patterns in Kotlin: Structural Patterns">&larr; Previous Post</a></li><li class=next><a href=https://xizzhu.me/post/2020-05-09-android-looper-handler/ data-toggle=tooltip data-placement=top title="Loopers and Handlers in Android">Next Post &rarr;</a></li></ul></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=https://github.com/xizzhu title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://linkedin.com/in/xizhizhu title=LinkedIn><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i><i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted">&nbsp;&bull;&nbsp;&copy;
