@@ -1,13 +1,165 @@
-<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Getting started with Kotlin Multiplaform Mobile (KMM) - xizzhu</title><meta name=description content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps."><meta name=author content="Xizhi Zhu"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"xizzhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2021-06-28-kotlin-multiplatform-mobile-kmm\/","name":"Getting started with kotlin multiplaform mobile ( kmm)"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Xizhi Zhu"},"headline":"Getting started with Kotlin Multiplaform Mobile (KMM)","description":"Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps.\n","inLanguage":"en","wordCount":935,"datePublished":"0001-01-01T00:00:00","dateModified":"2021-06-28T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["kmm, kotlin, android, ios"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2021-06-28-kotlin-multiplatform-mobile-kmm\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script><meta property="og:title" content="Getting started with Kotlin Multiplaform Mobile (KMM)"><meta property="og:description" content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps."><meta property="og:image" content="https://xizzhu.me/images/logo.png"><meta property="og:url" content="https://xizzhu.me/post/2021-06-28-kotlin-multiplatform-mobile-kmm/"><meta property="og:type" content="website"><meta property="og:site_name" content="xizzhu"><meta name=twitter:title content="Getting started with Kotlin Multiplaform Mobile (KMM)"><meta name=twitter:description content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps."><meta name=twitter:image content="https://xizzhu.me/images/logo.png"><meta name=twitter:card content="summary"><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta name=generator content="Hugo 0.83.1"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title=xizzhu><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-128400000-1','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Getting started with Kotlin Multiplaform Mobile (KMM) - xizzhu</title>
+<meta name=description content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps.">
+<meta name=author content="Xizhi Zhu"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"xizzhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2021-06-28-kotlin-multiplatform-mobile-kmm\/","name":"Getting started with kotlin multiplaform mobile ( kmm)"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Xizhi Zhu"},"headline":"Getting started with Kotlin Multiplaform Mobile (KMM)","description":"Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps.\n","inLanguage":"en","wordCount":935,"datePublished":"0001-01-01T00:00:00","dateModified":"2021-06-28T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["kmm, kotlin, android, ios"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2021-06-28-kotlin-multiplatform-mobile-kmm\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script>
+<meta property="og:title" content="Getting started with Kotlin Multiplaform Mobile (KMM)">
+<meta property="og:description" content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps.">
+<meta property="og:image" content="https://xizzhu.me/images/logo.png">
+<meta property="og:url" content="https://xizzhu.me/post/2021-06-28-kotlin-multiplatform-mobile-kmm/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="xizzhu">
+<meta name=twitter:title content="Getting started with Kotlin Multiplaform Mobile (KMM)">
+<meta name=twitter:description content="Kotlin Multiplatform Mobile (KMM) is a cross-platform framework to share code for Android and iOS apps.">
+<meta name=twitter:image content="https://xizzhu.me/images/logo.png">
+<meta name=twitter:card content="summary">
+<link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon>
+<meta name=generator content="Hugo 0.92.2">
+<link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title=xizzhu><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-128400000-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+<div class=container-fluid>
+<div class=navbar-header>
+<button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
 <span class=sr-only>Toggle navigation</span>
-<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
-<a class=navbar-brand href=https://xizzhu.me/>xizzhu</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=About href=/pages/about/>About</a></li><li><a title=Posts href=/post>Posts</a></li><li><a title=Bible href=/bible>Bible</a></li><li><a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title=xizzhu href=https://xizzhu.me/><img class=avatar-img src=https://xizzhu.me/images/logo.png alt=xizzhu></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+<a class=navbar-brand href=https://xizzhu.me/>xizzhu</a>
+</div>
+<div class="collapse navbar-collapse" id=main-navbar>
+<ul class="nav navbar-nav navbar-right">
+<li>
+<a title=About href=/pages/about/>About</a>
+</li>
+<li>
+<a title=Posts href=/post>Posts</a>
+</li>
+<li>
+<a title=Bible href=/bible>Bible</a>
+</li>
+<li>
+<a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a>
+</li>
+</ul>
+</div>
+<div class=avatar-container>
+<div class=avatar-img-border>
+<a title=xizzhu href=https://xizzhu.me/>
+<img class=avatar-img src=https://xizzhu.me/images/logo.png alt=xizzhu>
+</a>
+</div>
+</div>
+</div>
+</nav>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Getting started with Kotlin Multiplaform Mobile (KMM)</h1><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on June 28, 2021
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Xizhi Zhu</span></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p><a href=https://kotlinlang.org/docs/mobile/home.html>Kotlin Multiplatform Mobile (KMM)</a> is a cross-platform framework to share code for Android and iOS apps.</p><h3 id=when-to-use-kmm>When to use KMM?</h3><ul><li><p>It is highly recommended to <strong>write business logics</strong> in KMM, because it usually requires very limited or even no platform features.</p></li><li><p>We can also use KMM to <strong>access platform features</strong>, such as data accessing. For example, we can use <a href=https://ktor.io/>Ktor</a> to perform network requests, and <a href=https://cashapp.github.io/sqldelight/>SQLDelight</a> to access SQLite databases. We can also use <code>expect / actual</code> declarations to access platform specific features.</p></li><li><p>KMM can also be used to <strong>implement presentation layer</strong>. For modern declarative UI frameworks such as Jetpack Compose and SwiftUI, the <a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model View Intent (MVI)</a> pattern is highly recommended. For legacy UI frameworks, both MVI and the <a href=https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter>Model View Presenter (MVP)</a> pattern could be used.</p></li><li><p><strong>DO NOT use KMM for UI layer</strong>. Just don&rsquo;t.</p></li></ul><h4 id=be-aware-coroutines-users>Be aware, Coroutines users!</h4><p>It&rsquo;s worth noting that for <a href=/post/2019-05-23-kotlin-coroutine/>Coroutines</a>, only the single-threaded code on Kotlin Native is supported in the Stable version. The <a href=https://github.com/Kotlin/kotlinx.coroutines/tree/native-mt>multi-threaded</a> version is available with <a href=https://blog.jetbrains.com/kotlin/2020/07/kotlin-native-memory-management-roadmap/>known memory management issues</a>. Additional details can be found <a href=https://github.com/Kotlin/kotlinx.coroutines/issues/462>here</a>, and the latest update can be found <a href=https://blog.jetbrains.com/kotlin/2021/05/kotlin-native-memory-management-update/>here</a>.</p><p>Despite of this, in my opinion, KMM is mature enough for production. So, let&rsquo;s get started.</p><h3 id=create-kmm-project>Create KMM project</h3><p>First, we need to install <a href=https://developer.android.com/studio>Android Studio</a> 4.2 or above, <a href=https://apps.apple.com/us/app/xcode/id497799835>Xcode</a> 11.3 or above, and the <a href=https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile>Kotlin Multiplatform Mobile</a> plugin.</p><p>Now, we can create a KMM project from Android Studio by choosing the &ldquo;KMM Application&rdquo; template:
-<img src=/images/posts/create-kmm-project.png alt="Create KMM Project"></p><h4 id=project-structure>Project structure</h4><p>The basic KMM project consists of the three components:</p><ul><li><p>A <strong>shared</strong> module that contains common code shared by both Android and iOS. This module is built into an Android library or an iOS framework using Gradle build system.</p></li><li><p>An <strong>Android</strong> module that builds into an Android app, using Gradle build system.</p></li><li><p>An <strong>iOS</strong> module that builds into an iOS app, using Xcode build tools. It is not connected with other parts of the project via Gradle, but instead using the <em>shared</em> module as a framework.</p></li></ul><h3 id=the-shared-module>The shared module</h3><p>The <strong>shared</strong> module is the essential part of a KMM project, which uses the KMM plugin to configure the target:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div>
+<header class=header-section>
+<div class="intro-header no-img">
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class=post-heading>
+<h1>Getting started with Kotlin Multiplaform Mobile (KMM)</h1>
+<span class=post-meta>
+<i class="fas fa-calendar"></i>&nbsp;Posted on June 28, 2021
+&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Xizhi Zhu
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<article role=main class=blog-post>
+<p><a href=https://kotlinlang.org/docs/mobile/home.html>Kotlin Multiplatform Mobile (KMM)</a> is a cross-platform framework to share code for Android and iOS apps.</p>
+<h3 id=when-to-use-kmm>When to use KMM?</h3>
+<ul>
+<li>
+<p>It is highly recommended to <strong>write business logics</strong> in KMM, because it usually requires very limited or even no platform features.</p>
+</li>
+<li>
+<p>We can also use KMM to <strong>access platform features</strong>, such as data accessing. For example, we can use <a href=https://ktor.io/>Ktor</a> to perform network requests, and <a href=https://cashapp.github.io/sqldelight/>SQLDelight</a> to access SQLite databases. We can also use <code>expect / actual</code> declarations to access platform specific features.</p>
+</li>
+<li>
+<p>KMM can also be used to <strong>implement presentation layer</strong>. For modern declarative UI frameworks such as Jetpack Compose and SwiftUI, the <a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model View Intent (MVI)</a> pattern is highly recommended. For legacy UI frameworks, both MVI and the <a href=https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter>Model View Presenter (MVP)</a> pattern could be used.</p>
+</li>
+<li>
+<p><strong>DO NOT use KMM for UI layer</strong>. Just don&rsquo;t.</p>
+</li>
+</ul>
+<h4 id=be-aware-coroutines-users>Be aware, Coroutines users!</h4>
+<p>It&rsquo;s worth noting that for <a href=/post/2019-05-23-kotlin-coroutine/>Coroutines</a>, only the single-threaded code on Kotlin Native is supported in the Stable version. The <a href=https://github.com/Kotlin/kotlinx.coroutines/tree/native-mt>multi-threaded</a> version is available with <a href=https://blog.jetbrains.com/kotlin/2020/07/kotlin-native-memory-management-roadmap/>known memory management issues</a>. Additional details can be found <a href=https://github.com/Kotlin/kotlinx.coroutines/issues/462>here</a>, and the latest update can be found <a href=https://blog.jetbrains.com/kotlin/2021/05/kotlin-native-memory-management-update/>here</a>.</p>
+<p>Despite of this, in my opinion, KMM is mature enough for production. So, let&rsquo;s get started.</p>
+<h3 id=create-kmm-project>Create KMM project</h3>
+<p>First, we need to install <a href=https://developer.android.com/studio>Android Studio</a> 4.2 or above, <a href=https://apps.apple.com/us/app/xcode/id497799835>Xcode</a> 11.3 or above, and the <a href=https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile>Kotlin Multiplatform Mobile</a> plugin.</p>
+<p>Now, we can create a KMM project from Android Studio by choosing the &ldquo;KMM Application&rdquo; template:
+<img src=/images/posts/create-kmm-project.png alt="Create KMM Project"></p>
+<h4 id=project-structure>Project structure</h4>
+<p>The basic KMM project consists of the three components:</p>
+<ul>
+<li>
+<p>A <strong>shared</strong> module that contains common code shared by both Android and iOS. This module is built into an Android library or an iOS framework using Gradle build system.</p>
+</li>
+<li>
+<p>An <strong>Android</strong> module that builds into an Android app, using Gradle build system.</p>
+</li>
+<li>
+<p>An <strong>iOS</strong> module that builds into an iOS app, using Xcode build tools. It is not connected with other parts of the project via Gradle, but instead using the <em>shared</em> module as a framework.</p>
+</li>
+</ul>
+<h3 id=the-shared-module>The shared module</h3>
+<p>The <strong>shared</strong> module is the essential part of a KMM project, which uses the KMM plugin to configure the target:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
     kotlin(<span style=color:#e6db74>&#34;multiplatform&#34;</span>)
 }
 
@@ -37,11 +189,16 @@ kotlin {
 </span><span style=color:#75715e></span>        <span style=color:#66d9ef>val</span> iosMain <span style=color:#66d9ef>by</span> getting
         <span style=color:#66d9ef>val</span> iosTest <span style=color:#66d9ef>by</span> getting
     }
-}</code></pre></div></p><h4 id=android-library>Android library</h4><p>To configure the build for the Android library, we also need to add the plugin:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
+}</code></pre></div></p>
+<h4 id=android-library>Android library</h4>
+<p>To configure the build for the Android library, we also need to add the plugin:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
     <span style=color:#75715e>// ...
 </span><span style=color:#75715e></span>
     id(<span style=color:#e6db74>&#34;com.android.library&#34;</span>)
-}</code></pre></div></p><p>And also configure the <code>android {}</code> top-level block, e.g.:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>android {
+}</code></pre></div></p>
+<p>And also configure the <code>android {}</code> top-level block, e.g.:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>android {
     compileSdkVersion(<span style=color:#ae81ff>30</span>)
     sourceSets[<span style=color:#e6db74>&#34;main&#34;</span>].manifest.srcFile(<span style=color:#e6db74>&#34;src/androidMain/AndroidManifest.xml&#34;</span>)
     defaultConfig {
@@ -50,7 +207,11 @@ kotlin {
         versionCode = <span style=color:#ae81ff>1</span>
         versionName = <span style=color:#e6db74>&#34;1.0&#34;</span>
     }
-}</code></pre></div></p><p>To learn more about configuring the Android build, see the <a href=https://developer.android.com/studio/build#module-level>Android developer documentation</a>.</p><h5 id=publish-to-maven>Publish to Maven</h5><p>To publish the <strong>Android</strong> library to a Maven repository, we can use the <a href=https://docs.gradle.org/current/userguide/publishing_maven.html>Maven Publish plugin</a>:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
+}</code></pre></div></p>
+<p>To learn more about configuring the Android build, see the <a href=https://developer.android.com/studio/build#module-level>Android developer documentation</a>.</p>
+<h5 id=publish-to-maven>Publish to Maven</h5>
+<p>To publish the <strong>Android</strong> library to a Maven repository, we can use the <a href=https://docs.gradle.org/current/userguide/publishing_maven.html>Maven Publish plugin</a>:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
     <span style=color:#75715e>// ...
 </span><span style=color:#75715e></span>
     id(<span style=color:#e6db74>&#34;maven-publish&#34;</span>)
@@ -65,7 +226,11 @@ kotlin {
     android {
         publishLibraryVariants(<span style=color:#e6db74>&#34;release&#34;</span>, <span style=color:#e6db74>&#34;debug&#34;</span>)
     }
-}</code></pre></div></p><p>Then we can consume it same way as any other Maven libraries.</p><h4 id=ios-framework>iOS framework</h4><p>The configuration to build the iOS framework is stored inside the <code>ios {}</code> block within the <code>kotlin {}</code> top-level block:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>kotlin {
+}</code></pre></div></p>
+<p>Then we can consume it same way as any other Maven libraries.</p>
+<h4 id=ios-framework>iOS framework</h4>
+<p>The configuration to build the iOS framework is stored inside the <code>ios {}</code> block within the <code>kotlin {}</code> top-level block:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>kotlin {
     <span style=color:#75715e>// ...
 </span><span style=color:#75715e></span>
     <span style=color:#66d9ef>val</span> iosTarget: (String, KotlinNativeTarget.() <span style=color:#f92672>-&gt;</span> Unit) <span style=color:#f92672>-&gt;</span> KotlinNativeTarget =
@@ -81,7 +246,11 @@ kotlin {
             }
         }
     }
-}</code></pre></div></p><p>To learn more about configure the iOS build, see the <a href=https://kotlinlang.org/docs/mpp-build-native-binaries.html>Kotlin Native documentation</a>.</p><h5 id=publish-as-a-swift-package>Publish as a Swift package</h5><p>To publish the <strong>iOS</strong> framework as a Swift package, we can use the <a href=https://github.com/ge-org/multiplatform-swiftpackage>Multiplatform Swift Package plugin</a>:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
+}</code></pre></div></p>
+<p>To learn more about configure the iOS build, see the <a href=https://kotlinlang.org/docs/mpp-build-native-binaries.html>Kotlin Native documentation</a>.</p>
+<h5 id=publish-as-a-swift-package>Publish as a Swift package</h5>
+<p>To publish the <strong>iOS</strong> framework as a Swift package, we can use the <a href=https://github.com/ge-org/multiplatform-swiftpackage>Multiplatform Swift Package plugin</a>:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin>plugins {
     <span style=color:#75715e>// ...
 </span><span style=color:#75715e></span>
     id(<span style=color:#e6db74>&#34;com.chromaticnoise.multiplatform-swiftpackage&#34;</span>) version <span style=color:#e6db74>&#34;2.0.3&#34;</span>
@@ -93,9 +262,16 @@ multiplatformSwiftPackage {
     targetPlatforms {
         iOS { v(<span style=color:#e6db74>&#34;13&#34;</span>) }
     }
-}</code></pre></div></p><p>The Swift package is created at <code>shared/swiftpackage</code> by default, and we can publish it to a Git repo <a href=https://github.com/apple/swift-package-manager/blob/main/Documentation/Usage.md#publishing-a-package>with these steps</a>. To consume it, follow the tutorial <a href=https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app>here</a>.</p><h3 id=access-platform-specific-api>Access platform-specific API</h3><p>Unless you only use KMM to implement pure business logics and algorithms, you will very likely need to access platform-specific APIs or features. This can be achieved through the <code>expect / actual</code> declarations.</p><p>For example, we could define a log class in the <strong>commonMain</strong> source set of the <em>shared</em> module:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>expect</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlatformLog</span>() {
+}</code></pre></div></p>
+<p>The Swift package is created at <code>shared/swiftpackage</code> by default, and we can publish it to a Git repo <a href=https://github.com/apple/swift-package-manager/blob/main/Documentation/Usage.md#publishing-a-package>with these steps</a>. To consume it, follow the tutorial <a href=https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app>here</a>.</p>
+<h3 id=access-platform-specific-api>Access platform-specific API</h3>
+<p>Unless you only use KMM to implement pure business logics and algorithms, you will very likely need to access platform-specific APIs or features. This can be achieved through the <code>expect / actual</code> declarations.</p>
+<p>For example, we could define a log class in the <strong>commonMain</strong> source set of the <em>shared</em> module:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>expect</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlatformLog</span>() {
     <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>log</span>(msg: String)
-}</code></pre></div></p><p>The <code>expect</code> declarations are not allowed to contain any implementation, and KMM expects each platform to implement it using the <code>actual</code> keyword, e.g.:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// Android implementation in the androidMain source set.
+}</code></pre></div></p>
+<p>The <code>expect</code> declarations are not allowed to contain any implementation, and KMM expects each platform to implement it using the <code>actual</code> keyword, e.g.:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// Android implementation in the androidMain source set.
 </span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> android.util.Log
 
 <span style=color:#66d9ef>actual</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PlatformLog</span> <span style=color:#66d9ef>actual</span> <span style=color:#66d9ef>constructor</span>() {
@@ -111,22 +287,144 @@ multiplatformSwiftPackage {
     <span style=color:#66d9ef>actual</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>log</span>(msg: String) {
         NSLog(msg)
     }
-}</code></pre></div></p><h3 id=access-shared-code>Access shared code</h3><p>Shared code, including platform-specific code, can be used by other <strong>shared code</strong> and <strong>Android app</strong> like any other regular Kotlin code, e.g.:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>testLog</span>() {
+}</code></pre></div></p>
+<h3 id=access-shared-code>Access shared code</h3>
+<p>Shared code, including platform-specific code, can be used by other <strong>shared code</strong> and <strong>Android app</strong> like any other regular Kotlin code, e.g.:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>testLog</span>() {
     PlatformLog().log(<span style=color:#e6db74>&#34;just a test&#34;</span>)
-}</code></pre></div></p><p>On <strong>iOS</strong>, it&rsquo;s exported to something like this:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec>__attribute__((objc_subclassing_restricted))
+}</code></pre></div></p>
+<p>On <strong>iOS</strong>, it&rsquo;s exported to something like this:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objectivec data-lang=objectivec>__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name(<span style=color:#e6db74>&#34;PlatformLog&#34;</span>)))
 <span style=color:#66d9ef>@interface</span> <span style=color:#a6e22e>SharedPlatformLog</span> : <span style=color:#a6e22e>SharedBase</span>
 - (<span style=color:#66d9ef>instancetype</span>)<span style=color:#a6e22e>init</span> __attribute__((swift_name(<span style=color:#e6db74>&#34;init()&#34;</span>))) __attribute__((objc_designated_initializer));
 + (<span style=color:#66d9ef>instancetype</span>)<span style=color:#a6e22e>new</span> __attribute__((availability(swift, unavailable, message<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;use object initializers instead&#34;</span>)));
 - (<span style=color:#66d9ef>void</span>)<span style=color:#a6e22e>logMsg:</span>(NSString <span style=color:#f92672>*</span>)msg __attribute__((swift_name(<span style=color:#e6db74>&#34;log(msg:)&#34;</span>)));
-<span style=color:#66d9ef>@end</span>;</code></pre></div></p><p>So can be accessed in Swift like this:<div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>PlatformLog().log(msg: <span style=color:#e6db74>&#34;just a test&#34;</span>)</code></pre></div></p><h3 id=conclusions>Conclusions</h3><p>Even though KMM is still in <a href=https://kotlinlang.org/docs/mobile/kmm-evolution.html>alpha</a> with moving parts especially the KMM plugin and IDE support, it has already been used by many <a href=https://kotlinlang.org/lp/mobile/case-studies/>big names</a> in the industry. It is definitely something mobile developers should learn and adopt.</p><p>Thanks for reading, and have a lovely summer!</p><div class=blog-tags><a href=https://xizzhu.me//tags/kmm/>kmm</a>&nbsp;
+<span style=color:#66d9ef>@end</span>;</code></pre></div></p>
+<p>So can be accessed in Swift like this:
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-swift data-lang=swift>PlatformLog().log(msg: <span style=color:#e6db74>&#34;just a test&#34;</span>)</code></pre></div></p>
+<h3 id=conclusions>Conclusions</h3>
+<p>Even though KMM is still in <a href=https://kotlinlang.org/docs/mobile/kmm-evolution.html>alpha</a> with moving parts especially the KMM plugin and IDE support, it has already been used by many <a href=https://kotlinlang.org/lp/mobile/case-studies/>big names</a> in the industry. It is definitely something mobile developers should learn and adopt.</p>
+<p>Thanks for reading, and have a lovely summer!</p>
+<div class=blog-tags>
+<a href=https://xizzhu.me//tags/kmm/>kmm</a>&nbsp;
 <a href=https://xizzhu.me//tags/kotlin/>kotlin</a>&nbsp;
 <a href=https://xizzhu.me//tags/android/>android</a>&nbsp;
-<a href=https://xizzhu.me//tags/ios/>ios</a>&nbsp;</div><hr><section id=social-share><div class="list-inline footer-links"><div class=share-box aria-hidden=true><ul class=share><li><a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&text=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29&via=" target=_blank title="Share on Twitter"><i class="fab fa-twitter"></i></a></li><li><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f" target=_blank title="Share on Facebook"><i class="fab fa-facebook"></i></a></li><li><a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on Reddit"><i class="fab fa-reddit"></i></a></li><li><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a></li><li><a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on StumbleUpon"><i class="fab fa-stumbleupon"></i></a></li><li><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&description=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on Pinterest"><i class="fab fa-pinterest"></i></a></li></ul></div></div></section><h4 class=see-also>See also</h4><ul><li><a href=/post/2021-10-05-android-12-bluetooth-permissions/>New Bluetooth permissions in Android 12</a></li><li><a href=/post/2021-08-06-android-ble-throughput/>Understanding BLE throughput on Android</a></li><li><a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model-View-Intent Design Pattern on Android</a></li><li><a href=/post/2020-07-25-dependency-injection-hilt/>Dependency Injection with Hilt</a></li><li><a href=/post/2020-06-06-kotlin-generics/>Understanding Generics in Kotlin</a></li></ul></article><ul class="pager blog-pager"><li class=previous><a href=https://xizzhu.me/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/ data-toggle=tooltip data-placement=top title="Model-View-Intent Design Pattern on Android">&larr; Previous Post</a></li><li class=next><a href=https://xizzhu.me/post/2021-08-06-android-ble-throughput/ data-toggle=tooltip data-placement=top title="Understanding BLE throughput on Android">Next Post &rarr;</a></li></ul><div class=disqus-comments><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//xizhi-zhu.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=https://github.com/xizzhu title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://linkedin.com/in/xizhizhu title=LinkedIn><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted">Xizhi Zhu
+<a href=https://xizzhu.me//tags/ios/>ios</a>&nbsp;
+</div>
+<hr>
+<section id=social-share>
+<div class="list-inline footer-links">
+<div class=share-box aria-hidden=true>
+<ul class=share>
+<li>
+<a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&text=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29&via=" target=_blank title="Share on Twitter">
+<i class="fab fa-twitter"></i>
+</a>
+</li>
+<li>
+<a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f" target=_blank title="Share on Facebook">
+<i class="fab fa-facebook"></i>
+</a>
+</li>
+<li>
+<a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on Reddit">
+<i class="fab fa-reddit"></i>
+</a>
+</li>
+<li>
+<a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on LinkedIn">
+<i class="fab fa-linkedin"></i>
+</a>
+</li>
+<li>
+<a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&title=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on StumbleUpon">
+<i class="fab fa-stumbleupon"></i>
+</a>
+</li>
+<li>
+<a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2021-06-28-kotlin-multiplatform-mobile-kmm%2f&description=Getting%20started%20with%20Kotlin%20Multiplaform%20Mobile%20%28KMM%29" target=_blank title="Share on Pinterest">
+<i class="fab fa-pinterest"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<h4 class=see-also>See also</h4>
+<ul>
+<li><a href=/post/2021-10-05-android-12-bluetooth-permissions/>New Bluetooth permissions in Android 12</a></li>
+<li><a href=/post/2021-08-06-android-ble-throughput/>Understanding BLE throughput on Android</a></li>
+<li><a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model-View-Intent Design Pattern on Android</a></li>
+<li><a href=/post/2020-07-25-dependency-injection-hilt/>Dependency Injection with Hilt</a></li>
+<li><a href=/post/2020-06-06-kotlin-generics/>Understanding Generics in Kotlin</a></li>
+</ul>
+</article>
+<ul class="pager blog-pager">
+<li class=previous>
+<a href=https://xizzhu.me/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/ data-toggle=tooltip data-placement=top title="Model-View-Intent Design Pattern on Android">&larr; Previous Post</a>
+</li>
+<li class=next>
+<a href=https://xizzhu.me/post/2021-08-06-android-ble-throughput/ data-toggle=tooltip data-placement=top title="Understanding BLE throughput on Android">Next Post &rarr;</a>
+</li>
+</ul>
+<div class=disqus-comments>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//xizhi-zhu.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<div class=container>
+<div class=row>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<ul class="list-inline text-center footer-links">
+<li>
+<a href=https://github.com/xizzhu title=GitHub>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://linkedin.com/in/xizhizhu title=LinkedIn>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+<li>
+<a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow>
+<span class="fa-stack fa-lg">
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+</span>
+</a>
+</li>
+</ul>
+<p class="credits copyright text-muted">
+Xizhi Zhu
 &nbsp;&bull;&nbsp;&copy;
 2022
 &nbsp;&bull;&nbsp;
-<a href=https://xizzhu.me/>xizzhu</a></p><p class="credits theme-by text-muted"><a href=https://gohugo.io>Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a></p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script><script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script src=https://xizzhu.me/js/main.js></script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script></body></html>
+<a href=https://xizzhu.me/>xizzhu</a>
+</p>
+<p class="credits theme-by text-muted">
+<a href=https://gohugo.io>Hugo v0.92.2</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
+</p>
+</div>
+</div>
+</div>
+</footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script>
+<script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script src=https://xizzhu.me/js/main.js></script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script>
+</body>
+</html>
