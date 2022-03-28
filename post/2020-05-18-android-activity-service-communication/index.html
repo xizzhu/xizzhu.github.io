@@ -1,506 +1,223 @@
-<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Different ways Activities communicating with Services on Android - xizzhu</title>
-<meta name=description content="In this article, we present different ways Activities could use to communicate with Services on Android.">
-<meta name=author content="Xizhi Zhu"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"xizzhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2020-05-18-android-activity-service-communication\/","name":"Different ways activities communicating with services on android"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Xizhi Zhu"},"headline":"Different ways Activities communicating with Services on Android","description":"In this article, we present different ways Activities could use to communicate with Services on Android.\n","inLanguage":"en","wordCount":1246,"datePublished":"2020-05-18T00:00:00","dateModified":"2020-05-18T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["android"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2020-05-18-android-activity-service-communication\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script>
-<meta property="og:title" content="Different ways Activities communicating with Services on Android">
-<meta property="og:description" content="In this article, we present different ways Activities could use to communicate with Services on Android.">
-<meta property="og:image" content="https://xizzhu.me/images/logo.png">
-<meta property="og:url" content="https://xizzhu.me/post/2020-05-18-android-activity-service-communication/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="xizzhu">
-<meta name=twitter:title content="Different ways Activities communicating with Services on Android">
-<meta name=twitter:description content="In this article, we present different ways Activities could use to communicate with Services on Android.">
-<meta name=twitter:image content="https://xizzhu.me/images/logo.png">
-<meta name=twitter:card content="summary">
-<link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon>
-<meta name=generator content="Hugo 0.92.2">
-<link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title=xizzhu><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
-<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-128400000-1','auto'),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-</head>
-<body>
-<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-<div class=container-fluid>
-<div class=navbar-header>
-<button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
+<!doctype html><html lang=en itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><title>Different ways Activities communicating with Services on Android - xizzhu</title><meta name=description content="In this article, we present different ways Activities could use to communicate with Services on Android."><meta name=author content="Xizhi Zhu"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"xizzhu","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"https:\/\/xizzhu.me\/"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/xizzhu.me\/","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"https:\/\/xizzhu.me\/post\/2020-05-18-android-activity-service-communication\/","name":"Different ways activities communicating with services on android"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Xizhi Zhu"},"headline":"Different ways Activities communicating with Services on Android","description":"In this article, we present different ways Activities could use to communicate with Services on Android.\n","inLanguage":"en","wordCount":1246,"datePublished":"2020-05-18T00:00:00","dateModified":"2020-05-18T00:00:00","image":"https:\/\/xizzhu.me\/images\/logo.png","keywords":["android"],"mainEntityOfPage":"https:\/\/xizzhu.me\/post\/2020-05-18-android-activity-service-communication\/","publisher":{"@type":"Organization","name":"https:\/\/xizzhu.me\/","logo":{"@type":"ImageObject","url":"https:\/\/xizzhu.me\/images\/logo.png","height":60,"width":60}}}</script><meta property="og:title" content="Different ways Activities communicating with Services on Android"><meta property="og:description" content="In this article, we present different ways Activities could use to communicate with Services on Android."><meta property="og:image" content="https://xizzhu.me/images/logo.png"><meta property="og:url" content="https://xizzhu.me/post/2020-05-18-android-activity-service-communication/"><meta property="og:type" content="website"><meta property="og:site_name" content="xizzhu"><meta name=twitter:title content="Different ways Activities communicating with Services on Android"><meta name=twitter:description content="In this article, we present different ways Activities could use to communicate with Services on Android."><meta name=twitter:image content="https://xizzhu.me/images/logo.png"><meta name=twitter:card content="summary"><link href=https://xizzhu.me/images/logo.png rel=icon type=image/x-icon><meta name=generator content="Hugo 0.96.0"><link rel=alternate href=https://xizzhu.me/index.xml type=application/rss+xml title=xizzhu><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://xizzhu.me/css/main.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"><link rel=stylesheet href=https://xizzhu.me/css/syntax.css><link rel=stylesheet href=https://xizzhu.me/css/codeblock.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css integrity=sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css integrity=sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R crossorigin=anonymous><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-128400000-1","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top navbar-custom"><div class=container-fluid><div class=navbar-header><button type=button class=navbar-toggle data-toggle=collapse data-target=#main-navbar>
 <span class=sr-only>Toggle navigation</span>
 <span class=icon-bar></span>
 <span class=icon-bar></span>
-<span class=icon-bar></span>
-</button>
-<a class=navbar-brand href=https://xizzhu.me/>xizzhu</a>
-</div>
-<div class="collapse navbar-collapse" id=main-navbar>
-<ul class="nav navbar-nav navbar-right">
-<li>
-<a title=About href=/pages/about/>About</a>
-</li>
-<li>
-<a title=Posts href=/post>Posts</a>
-</li>
-<li>
-<a title=Bible href=/bible>Bible</a>
-</li>
-<li>
-<a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a>
-</li>
-</ul>
-</div>
-<div class=avatar-container>
-<div class=avatar-img-border>
-<a title=xizzhu href=https://xizzhu.me/>
-<img class=avatar-img src=https://xizzhu.me/images/logo.png alt=xizzhu>
-</a>
-</div>
-</div>
-</div>
-</nav>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
-<div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
-<div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<span class=icon-bar></span></button>
+<a class=navbar-brand href=https://xizzhu.me/>xizzhu</a></div><div class="collapse navbar-collapse" id=main-navbar><ul class="nav navbar-nav navbar-right"><li><a title=About href=/pages/about/>About</a></li><li><a title=Posts href=/post>Posts</a></li><li><a title=Bible href=/bible>Bible</a></li><li><a title=随笔 href=/%e9%9a%8f%e7%ac%94>随笔</a></li></ul></div><div class=avatar-container><div class=avatar-img-border><a title=xizzhu href=https://xizzhu.me/><img class=avatar-img src=https://xizzhu.me/images/logo.png alt=xizzhu></a></div></div></div></nav><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-<div class=pswp__preloader>
-<div class=pswp__preloader__icn>
-<div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-</button>
-<div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div>
-<header class=header-section>
-<div class="intro-header no-img">
-<div class=container>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<div class=post-heading>
-<h1>Different ways Activities communicating with Services on Android</h1>
-<span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Posted on May 18, 2020
-&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Xizhi Zhu
-</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</header>
-<div class=container role=main>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<article role=main class=blog-post>
-<p>In this article, we present different ways <a href=https://developer.android.com/reference/android/app/Activity>Activities</a> could use to communicate with <a href=https://developer.android.com/reference/android/app/Service>Services</a> on Android.</p>
-<h3 id=1-using-intent>1. Using Intent</h3>
-<h4 id=11-contextstartservice>1.1. Context.startService()</h4>
-<p>The simplest way to communicate with a <code>Service</code> is to send an <code>Intent</code> through <code>Context.startService()</code>, e.g.:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
-        <span style=color:#66d9ef>super</span>.onStart()
-
-        startService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java).putExtra(<span style=color:#e6db74>&#34;key&#34;</span>, <span style=color:#ae81ff>777</span>))
-    }
-}
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStartCommand</span>(intent: Intent?, flags: Int, startId: Int): Int {
-        println(<span style=color:#e6db74>&#34;onStartCommand: </span><span style=color:#e6db74>${intent?.getIntExtra(&#34;key&#34;, -1)}</span><span style=color:#e6db74>&#34;</span>)
-
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>super</span>.onStartCommand(intent, flags, startId)
-    }
-}</code></pre></div></p>
-<p>This works when the service is running in the same process, or in a separate process. However, <code>Service</code> can&rsquo;t use <code>Context.startActivity()</code> to send an intent back to the same activity instance. Also, it is an expensive operation, which can take several milliseconds of CPU time.</p>
-<h4 id=12-contextsendbroadcast>1.2. Context.sendBroadcast()</h4>
-<p>A similar way is to use <code>Context.sendBroadcast()</code> to send an intent, e.g.:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
-        <span style=color:#66d9ef>super</span>.onStart()
-
-        <span style=color:#75715e>// assume the service is started, and already registered the receiver
-</span><span style=color:#75715e></span>        sendBroadcast(Intent(<span style=color:#e6db74>&#34;test_action&#34;</span>).putExtra(<span style=color:#e6db74>&#34;key&#34;</span>, <span style=color:#ae81ff>777</span>))
-    }
-}
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> broadcastReceiver = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>BroadcastReceiver</span>() {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onReceive</span>(context: Context, intent: Intent) {
-            println(<span style=color:#e6db74>&#34;onReceive: </span><span style=color:#e6db74>${intent.getIntExtra(&#34;key&#34;, -1)}</span><span style=color:#e6db74>&#34;</span>)
-        }
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onCreate</span>() {
-        <span style=color:#66d9ef>super</span>.onCreate()
-
-        registerReceiver(broadcastReceiver, IntentFilter(<span style=color:#e6db74>&#34;test_action&#34;</span>))
-    }
-}</code></pre></div></p>
-<p>This also works when the service is running in the same process, or in a separate process. <code>Service</code> can also send an intent back to activity using the same approach.</p>
-<p>If the service is running in the same process, an alternative is to use <a href=https://developer.android.com/reference/kotlin/androidx/localbroadcastmanager/content/LocalBroadcastManager>LocalBroadcastManager</a> or other observer pattern tools.</p>
-<p>However, using broadcast or event bus is a layer violation that any component in the app could listen to events from anywhere. Use with caution.</p>
-<h3 id=2-bound-service>2. Bound Service</h3>
-<h4 id=21-extending-binder>2.1. Extending Binder</h4>
-<p>We can implement own <code>Binder</code> class to provide direct access to the service instance:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#75715e>// this class will be given to the client when the service is bound
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// client can get a reference to the service through it
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyBinder</span>(<span style=color:#66d9ef>val</span> service: MyService): Binder()
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> binder = MyBinder(<span style=color:#66d9ef>this</span>)
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = binder
-
-    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doSomething</span>() {
-        println(<span style=color:#e6db74>&#34;do something...&#34;</span>)
-    }
-}
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> myService: MyService? = <span style=color:#66d9ef>null</span>
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
-            <span style=color:#75715e>// the service is connected, we can get a reference to it
-</span><span style=color:#75715e></span>            myService = (service <span style=color:#66d9ef>as</span> MyService.MyBinder).service
-
-            <span style=color:#75715e>// call a public method
-</span><span style=color:#75715e></span>            myService<span style=color:#f92672>?.</span>doSomething()
-        }
-
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
-            myService = <span style=color:#66d9ef>null</span>
-        }
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
-        <span style=color:#66d9ef>super</span>.onStart()
-
-        <span style=color:#75715e>// bind the service, and start it if needed
-</span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
-        <span style=color:#75715e>// disconnect from the service, and nullify the reference
-</span><span style=color:#75715e></span>        unbindService(connection)
-        myService = <span style=color:#66d9ef>null</span>
-
-        <span style=color:#66d9ef>super</span>.onStop()
-    }
-}</code></pre></div></p>
-<p>This is very efficient (it&rsquo;s direct function calls), and easy to build two-way communications through listeners or callbacks. However, this approach <strong>only works when the service is running in the same process</strong>.</p>
-<h4 id=22-using-messenger>2.2. Using Messenger</h4>
-<p>We talked about this approach in a previous article, <a href=/post/2020-05-09-android-looper-handler/>Loopers and Handlers in Android</a>. Here I&rsquo;m extending it to support a two way communication:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#75715e>// the Handler to handle incoming messages
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> handler = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>Handler</span>() {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleMessage</span>(msg: Message) {
-            println(<span style=color:#e6db74>&#34;MyService handleMessage: msg - </span><span style=color:#e6db74>$msg</span><span style=color:#e6db74>&#34;</span>)
-
-            msg.replyTo.send(Message.obtain().apply { what= <span style=color:#ae81ff>777777</span> })
-        }
-    }
-
-    <span style=color:#75715e>// the created Messenger will dispatch incoming messages to the handler
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> incoming = Messenger(handler)
-
-    <span style=color:#75715e>// when someone binds to the service, we return the IBinder backing the
-</span><span style=color:#75715e></span>    <span style=color:#75715e>// messenger, so that the peer can use to send messages
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = incoming.binder
-}
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#75715e>// handle incoming messages
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> handler = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>Handler</span>() {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleMessage</span>(msg: Message) {
-            println(<span style=color:#e6db74>&#34;MyActivity handleMessage: msg - </span><span style=color:#e6db74>$msg</span><span style=color:#e6db74>&#34;</span>)
-        }
-    }
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> incoming = Messenger(handler)
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> outgoing: Messenger? = <span style=color:#66d9ef>null</span>
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
-            <span style=color:#75715e>// when the service is connected, we create the Messenger to send messages
-</span><span style=color:#75715e></span>            outgoing = Messenger(service)
-
-            <span style=color:#75715e>// send a message
-</span><span style=color:#75715e></span>            outgoing<span style=color:#f92672>?.</span>send(Message.obtain().apply {
-                replyTo = incoming <span style=color:#75715e>// passing the messenger to the service
-</span><span style=color:#75715e></span>                what = <span style=color:#ae81ff>777</span>
-            })
-        }
-
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
-            <span style=color:#75715e>// nullify the messenger in case the service is disconnected unexpectedly,
-</span><span style=color:#75715e></span>            <span style=color:#75715e>// e.g. the remote process crashes
-</span><span style=color:#75715e></span>            outgoing = <span style=color:#66d9ef>null</span>
-        }
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
-        <span style=color:#66d9ef>super</span>.onStart()
-
-        <span style=color:#75715e>// bind the service, and start it if needed
-</span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
-        <span style=color:#75715e>// disconnect from the service, and nullify the messenger
-</span><span style=color:#75715e></span>        unbindService(connection)
-        outgoing = <span style=color:#66d9ef>null</span>
-
-        <span style=color:#66d9ef>super</span>.onStop()
-    }
-}</code></pre></div></p>
-<p>If we want to allow the service to actively push messages to the client, we can e.g. put the <code>Messenger</code> in the <code>Intent</code> and send it to the service using <code>Context.startService()</code>:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> outgoing: Messenger? = <span style=color:#66d9ef>null</span>
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStartCommand</span>(intent: Intent?, flags: Int, startId: Int): Int {
-        outgoing = intent<span style=color:#f92672>?.</span>getParcelableExtra(<span style=color:#e6db74>&#34;messenger&#34;</span>)
-
-        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>super</span>.onStartCommand(intent, flags, startId)
-    }
-}
-
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onCreate</span>(savedInstanceState: Bundle?) {
-        <span style=color:#66d9ef>super</span>.onCreate(savedInstanceState)
-
-        startService(Intent(<span style=color:#66d9ef>this</span>, RemoteService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java).putExtra(<span style=color:#e6db74>&#34;messenger&#34;</span>, incoming))
-    }
-
-    <span style=color:#f92672>..</span>.
-}</code></pre></div></p>
-<p>Using <code>Messenger</code> works when the service is running in the same process, or in a separate process. However, you will need to maintain the protocol for the messages passed back and forth.</p>
-<h4 id=23-using-aidl>2.3. Using AIDL</h4>
-<p>To use <a href=https://developer.android.com/guide/components/aidl>AIDL</a>, we first need to create an <em>.aidl</em> file:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> com.example.myapplication<span style=color:#f92672>;</span>
-
-<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IMyInterface</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>long</span> <span style=color:#a6e22e>getTid</span><span style=color:#f92672>();</span>
-<span style=color:#f92672>}</span></code></pre></div></p>
-<p>When building the project, it will generate a helper abstract class <code>IMyInterface.Stub</code> for us to implement:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> binder = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>IMyInterface</span>.Stub() {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTid</span>(): Long = Thread.currentThread().id
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = binder
-}</code></pre></div></p>
-<p>Finally, we can use it in the activity:
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> myInterface: IMyInterface? = <span style=color:#66d9ef>null</span>
-
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
-            <span style=color:#75715e>// get a reference to IMyInterface
-</span><span style=color:#75715e></span>            myInterface = IMyInterface.Stub.asInterface(service)
-
-            <span style=color:#75715e>// call a public method
-</span><span style=color:#75715e></span>            println(<span style=color:#e6db74>&#34;Thread info: </span><span style=color:#e6db74>${myInterface?.threadInfo}</span><span style=color:#e6db74>&#34;</span>)
-        }
-
-        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
-            myInterface = <span style=color:#66d9ef>null</span>
-        }
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
-        <span style=color:#66d9ef>super</span>.onStart()
-
-        <span style=color:#75715e>// bind the service, and start it if needed
-</span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
-    }
-
-    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
-        <span style=color:#75715e>// disconnect from the service, and nullify the reference
-</span><span style=color:#75715e></span>        unbindService(connection)
-        myInterface = <span style=color:#66d9ef>null</span>
-
-        <span style=color:#66d9ef>super</span>.onStop()
-    }
-}</code></pre></div></p>
-<p>Similarly, if we create another AIDL interface, and pass it from the activity to the service, we can enable the service calling methods in the activity.</p>
-<p>Using AIDL works when the service is running in the same process, or in a separate process. However, we need to be careful with the threading:</p>
-<ol>
-<li>When the service is running the the same process, calling an AIDL interface is simply a direct function call.</li>
-<li>However, when the service is running in a separate process, the call will be dispatched on one of the binder threads.</li>
-</ol>
-<h3 id=conclusion>Conclusion</h3>
-<p>In this article, we discussed different approaches to enable communications between activities and services. We can use the following rules to decide which approach to use:</p>
-<ol>
-<li>
-<p>When we need to <strong>occasionally send a command to a service</strong>, use <code>Context.startService()</code>. For example, a workout tracking app can use this approach to start or stop a workout.</p>
-</li>
-<li>
-<p>When we need to <strong>communicate between activities and services frequently</strong>. For example, we want to regularly receive stats update from the workout tracking app.</p>
-<ul>
-<li>
-<p>if the service is <strong>running in the same process</strong>, extend the <code>Binder</code> class.</p>
-</li>
-<li>
-<p>if the service is <strong>running in a separate process</strong>&mldr;</p>
-<ul>
-<li>
-<p>if we don&rsquo;t want to manage threads, use <code>Messenger</code>.</p>
-</li>
-<li>
-<p>if we don&rsquo;t want to maintain the protocol for messages sent back and forth, use AIDL.</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>Hope this helps and happy coding!</p>
-<div class=blog-tags>
-<a href=https://xizzhu.me//tags/android/>android</a>&nbsp;
-</div>
-<hr>
-<section id=social-share>
-<div class="list-inline footer-links">
-<div class=share-box aria-hidden=true>
-<ul class=share>
-<li>
-<a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&text=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android&via=" target=_blank title="Share on Twitter">
-<i class="fab fa-twitter"></i>
-</a>
-</li>
-<li>
-<a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f" target=_blank title="Share on Facebook">
-<i class="fab fa-facebook"></i>
-</a>
-</li>
-<li>
-<a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on Reddit">
-<i class="fab fa-reddit"></i>
-</a>
-</li>
-<li>
-<a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on LinkedIn">
-<i class="fab fa-linkedin"></i>
-</a>
-</li>
-<li>
-<a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on StumbleUpon">
-<i class="fab fa-stumbleupon"></i>
-</a>
-</li>
-<li>
-<a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&description=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on Pinterest">
-<i class="fab fa-pinterest"></i>
-</a>
-</li>
-</ul>
-</div>
-</div>
-</section>
-<h4 class=see-also>See also</h4>
-<ul>
-<li><a href=/post/2022-02-15-android-remote-service-client-dead-binder/>Get notified when bound client is dead</a></li>
-<li><a href=/post/2021-10-05-android-12-bluetooth-permissions/>New Bluetooth permissions in Android 12</a></li>
-<li><a href=/post/2021-08-06-android-ble-throughput/>Understanding BLE throughput on Android</a></li>
-<li><a href=/post/2021-06-28-kotlin-multiplatform-mobile-kmm/>Getting started with Kotlin Multiplaform Mobile (KMM)</a></li>
-<li><a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model-View-Intent Design Pattern on Android</a></li>
-</ul>
-</article>
-<ul class="pager blog-pager">
-<li class=previous>
-<a href=https://xizzhu.me/post/2020-05-14-android-getsystemservice/ data-toggle=tooltip data-placement=top title="How Android apps get handles to system services">&larr; Previous Post</a>
-</li>
-<li class=next>
-<a href=https://xizzhu.me/post/2020-06-06-kotlin-generics/ data-toggle=tooltip data-placement=top title="Understanding Generics in Kotlin">Next Post &rarr;</a>
-</li>
-</ul>
-<div class=disqus-comments>
-<div id=disqus_thread></div>
-<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//xizhi-zhu.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-</div>
-<footer>
-<div class=container>
-<div class=row>
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-<ul class="list-inline text-center footer-links">
-<li>
-<a href=https://github.com/xizzhu title=GitHub>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-github fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://linkedin.com/in/xizhizhu title=LinkedIn>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-<li>
-<a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>
-</ul>
-<p class="credits copyright text-muted">
-Xizhi Zhu
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><h1>Different ways Activities communicating with Services on Android</h1><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on May 18, 2020
+&nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Xizhi Zhu</span></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article role=main class=blog-post><p>In this article, we present different ways <a href=https://developer.android.com/reference/android/app/Activity>Activities</a> could use to communicate with <a href=https://developer.android.com/reference/android/app/Service>Services</a> on Android.</p><h3 id=1-using-intent>1. Using Intent</h3><h4 id=11-contextstartservice>1.1. Context.startService()</h4><p>The simplest way to communicate with a <code>Service</code> is to send an <code>Intent</code> through <code>Context.startService()</code>, e.g.:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStart()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        startService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java).putExtra(<span style=color:#e6db74>&#34;key&#34;</span>, <span style=color:#ae81ff>777</span>))
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStartCommand</span>(intent: Intent?, flags: Int, startId: Int): Int {
+</span></span><span style=display:flex><span>        println(<span style=color:#e6db74>&#34;onStartCommand: </span><span style=color:#e6db74>${intent?.getIntExtra(&#34;key&#34;, -1)}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>super</span>.onStartCommand(intent, flags, startId)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>This works when the service is running in the same process, or in a separate process. However, <code>Service</code> can&rsquo;t use <code>Context.startActivity()</code> to send an intent back to the same activity instance. Also, it is an expensive operation, which can take several milliseconds of CPU time.</p><h4 id=12-contextsendbroadcast>1.2. Context.sendBroadcast()</h4><p>A similar way is to use <code>Context.sendBroadcast()</code> to send an intent, e.g.:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStart()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// assume the service is started, and already registered the receiver
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        sendBroadcast(Intent(<span style=color:#e6db74>&#34;test_action&#34;</span>).putExtra(<span style=color:#e6db74>&#34;key&#34;</span>, <span style=color:#ae81ff>777</span>))
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> broadcastReceiver = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>BroadcastReceiver</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onReceive</span>(context: Context, intent: Intent) {
+</span></span><span style=display:flex><span>            println(<span style=color:#e6db74>&#34;onReceive: </span><span style=color:#e6db74>${intent.getIntExtra(&#34;key&#34;, -1)}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onCreate</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onCreate()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        registerReceiver(broadcastReceiver, IntentFilter(<span style=color:#e6db74>&#34;test_action&#34;</span>))
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>This also works when the service is running in the same process, or in a separate process. <code>Service</code> can also send an intent back to activity using the same approach.</p><p>If the service is running in the same process, an alternative is to use <a href=https://developer.android.com/reference/kotlin/androidx/localbroadcastmanager/content/LocalBroadcastManager>LocalBroadcastManager</a> or other observer pattern tools.</p><p>However, using broadcast or event bus is a layer violation that any component in the app could listen to events from anywhere. Use with caution.</p><h3 id=2-bound-service>2. Bound Service</h3><h4 id=21-extending-binder>2.1. Extending Binder</h4><p>We can implement own <code>Binder</code> class to provide direct access to the service instance:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// this class will be given to the client when the service is bound
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// client can get a reference to the service through it
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyBinder</span>(<span style=color:#66d9ef>val</span> service: MyService): Binder()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> binder = MyBinder(<span style=color:#66d9ef>this</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = binder
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>doSomething</span>() {
+</span></span><span style=display:flex><span>        println(<span style=color:#e6db74>&#34;do something...&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> myService: MyService? = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// the service is connected, we can get a reference to it
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            myService = (service <span style=color:#66d9ef>as</span> MyService.MyBinder).service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// call a public method
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            myService<span style=color:#f92672>?.</span>doSomething()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
+</span></span><span style=display:flex><span>            myService = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStart()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// bind the service, and start it if needed
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// disconnect from the service, and nullify the reference
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unbindService(connection)
+</span></span><span style=display:flex><span>        myService = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStop()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>This is very efficient (it&rsquo;s direct function calls), and easy to build two-way communications through listeners or callbacks. However, this approach <strong>only works when the service is running in the same process</strong>.</p><h4 id=22-using-messenger>2.2. Using Messenger</h4><p>We talked about this approach in a previous article, <a href=/post/2020-05-09-android-looper-handler/>Loopers and Handlers in Android</a>. Here I&rsquo;m extending it to support a two way communication:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// the Handler to handle incoming messages
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> handler = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>Handler</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleMessage</span>(msg: Message) {
+</span></span><span style=display:flex><span>            println(<span style=color:#e6db74>&#34;MyService handleMessage: msg - </span><span style=color:#e6db74>$msg</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            msg.replyTo.send(Message.obtain().apply { what= <span style=color:#ae81ff>777777</span> })
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// the created Messenger will dispatch incoming messages to the handler
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> incoming = Messenger(handler)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// when someone binds to the service, we return the IBinder backing the
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// messenger, so that the peer can use to send messages
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = incoming.binder
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// handle incoming messages
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> handler = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>Handler</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleMessage</span>(msg: Message) {
+</span></span><span style=display:flex><span>            println(<span style=color:#e6db74>&#34;MyActivity handleMessage: msg - </span><span style=color:#e6db74>$msg</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> incoming = Messenger(handler)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> outgoing: Messenger? = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// when the service is connected, we create the Messenger to send messages
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            outgoing = Messenger(service)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// send a message
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            outgoing<span style=color:#f92672>?.</span>send(Message.obtain().apply {
+</span></span><span style=display:flex><span>                replyTo = incoming <span style=color:#75715e>// passing the messenger to the service
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                what = <span style=color:#ae81ff>777</span>
+</span></span><span style=display:flex><span>            })
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// nullify the messenger in case the service is disconnected unexpectedly,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>// e.g. the remote process crashes
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            outgoing = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStart()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// bind the service, and start it if needed
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// disconnect from the service, and nullify the messenger
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unbindService(connection)
+</span></span><span style=display:flex><span>        outgoing = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStop()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>If we want to allow the service to actively push messages to the client, we can e.g. put the <code>Messenger</code> in the <code>Intent</code> and send it to the service using <code>Context.startService()</code>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> outgoing: Messenger? = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStartCommand</span>(intent: Intent?, flags: Int, startId: Int): Int {
+</span></span><span style=display:flex><span>        outgoing = intent<span style=color:#f92672>?.</span>getParcelableExtra(<span style=color:#e6db74>&#34;messenger&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>super</span>.onStartCommand(intent, flags, startId)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onCreate</span>(savedInstanceState: Bundle?) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onCreate(savedInstanceState)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        startService(Intent(<span style=color:#66d9ef>this</span>, RemoteService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java).putExtra(<span style=color:#e6db74>&#34;messenger&#34;</span>, incoming))
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>..</span>.
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>Using <code>Messenger</code> works when the service is running in the same process, or in a separate process. However, you will need to maintain the protocol for the messages passed back and forth.</p><h4 id=23-using-aidl>2.3. Using AIDL</h4><p>To use <a href=https://developer.android.com/guide/components/aidl>AIDL</a>, we first need to create an <em>.aidl</em> file:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.example.myapplication<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>IMyInterface</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>long</span> <span style=color:#a6e22e>getTid</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span></span></span></code></pre></div></p><p>When building the project, it will generate a helper abstract class <code>IMyInterface.Stub</code> for us to implement:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyService</span> : Service() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> binder = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>IMyInterface</span>.Stub() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTid</span>(): Long = Thread.currentThread().id
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onBind</span>(intent: Intent?): IBinder? = binder
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>Finally, we can use it in the activity:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyActivity</span> : Activity() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>var</span> myInterface: IMyInterface? = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> connection = <span style=color:#66d9ef>object</span> <span style=color:#960050;background-color:#1e0010>: </span><span style=color:#a6e22e>ServiceConnection</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceConnected</span>(name: ComponentName, service: IBinder) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// get a reference to IMyInterface
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            myInterface = IMyInterface.Stub.asInterface(service)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// call a public method
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            println(<span style=color:#e6db74>&#34;Thread info: </span><span style=color:#e6db74>${myInterface?.threadInfo}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onServiceDisconnected</span>(name: ComponentName) {
+</span></span><span style=display:flex><span>            myInterface = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStart</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStart()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// bind the service, and start it if needed
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        bindService(Intent(<span style=color:#66d9ef>this</span>, MyService<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java), connection, BIND_AUTO_CREATE)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>onStop</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// disconnect from the service, and nullify the reference
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        unbindService(connection)
+</span></span><span style=display:flex><span>        myInterface = <span style=color:#66d9ef>null</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>.onStop()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></p><p>Similarly, if we create another AIDL interface, and pass it from the activity to the service, we can enable the service calling methods in the activity.</p><p>Using AIDL works when the service is running in the same process, or in a separate process. However, we need to be careful with the threading:</p><ol><li>When the service is running the the same process, calling an AIDL interface is simply a direct function call.</li><li>However, when the service is running in a separate process, the call will be dispatched on one of the binder threads.</li></ol><h3 id=conclusion>Conclusion</h3><p>In this article, we discussed different approaches to enable communications between activities and services. We can use the following rules to decide which approach to use:</p><ol><li><p>When we need to <strong>occasionally send a command to a service</strong>, use <code>Context.startService()</code>. For example, a workout tracking app can use this approach to start or stop a workout.</p></li><li><p>When we need to <strong>communicate between activities and services frequently</strong>. For example, we want to regularly receive stats update from the workout tracking app.</p><ul><li><p>if the service is <strong>running in the same process</strong>, extend the <code>Binder</code> class.</p></li><li><p>if the service is <strong>running in a separate process</strong>&mldr;</p><ul><li><p>if we don&rsquo;t want to manage threads, use <code>Messenger</code>.</p></li><li><p>if we don&rsquo;t want to maintain the protocol for messages sent back and forth, use AIDL.</p></li></ul></li></ul></li></ol><p>Hope this helps and happy coding!</p><div class=blog-tags><a href=https://xizzhu.me//tags/android/>android</a>&nbsp;</div><hr><section id=social-share><div class="list-inline footer-links"><div class=share-box aria-hidden=true><ul class=share><li><a href="//twitter.com/share?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&text=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android&via=" target=_blank title="Share on Twitter"><i class="fab fa-twitter"></i></a></li><li><a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f" target=_blank title="Share on Facebook"><i class="fab fa-facebook"></i></a></li><li><a href="//reddit.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on Reddit"><i class="fab fa-reddit"></i></a></li><li><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a></li><li><a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&title=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on StumbleUpon"><i class="fab fa-stumbleupon"></i></a></li><li><a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fxizzhu.me%2fpost%2f2020-05-18-android-activity-service-communication%2f&description=Different%20ways%20Activities%20communicating%20with%20Services%20on%20Android" target=_blank title="Share on Pinterest"><i class="fab fa-pinterest"></i></a></li></ul></div></div></section><h4 class=see-also>See also</h4><ul><li><a href=/post/2022-02-15-android-remote-service-client-dead-binder/>Get notified when bound client is dead</a></li><li><a href=/post/2021-10-05-android-12-bluetooth-permissions/>New Bluetooth permissions in Android 12</a></li><li><a href=/post/2021-08-06-android-ble-throughput/>Understanding BLE throughput on Android</a></li><li><a href=/post/2021-06-28-kotlin-multiplatform-mobile-kmm/>Getting started with Kotlin Multiplaform Mobile (KMM)</a></li><li><a href=/post/2021-06-21-android-mvi-kotlin-coroutines-flow-compose/>Model-View-Intent Design Pattern on Android</a></li></ul></article><ul class="pager blog-pager"><li class=previous><a href=https://xizzhu.me/post/2020-05-14-android-getsystemservice/ data-toggle=tooltip data-placement=top title="How Android apps get handles to system services">&larr; Previous Post</a></li><li class=next><a href=https://xizzhu.me/post/2020-06-06-kotlin-generics/ data-toggle=tooltip data-placement=top title="Understanding Generics in Kotlin">Next Post &rarr;</a></li></ul><div class=disqus-comments><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//xizhi-zhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div></div><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center footer-links"><li><a href=https://github.com/xizzhu title=GitHub><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li><li><a href=https://stackoverflow.com/users/1664863/xizzhu title=StackOverflow><span class="fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="credits copyright text-muted">Xizhi Zhu
 &nbsp;&bull;&nbsp;&copy;
 2022
 &nbsp;&bull;&nbsp;
-<a href=https://xizzhu.me/>xizzhu</a>
-</p>
-<p class="credits theme-by text-muted">
-<a href=https://gohugo.io>Hugo v0.92.2</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
-</p>
-</div>
-</div>
-</div>
-</footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
+<a href=https://xizzhu.me/>xizzhu</a></p><p class="credits theme-by text-muted"><a href=https://gohugo.io>Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a></p></div></div></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous></script>
 <script src=https://code.jquery.com/jquery-1.12.4.min.js integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin=anonymous></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
 <script src=https://xizzhu.me/js/main.js></script><script>renderMathInElement(document.body)</script><script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js integrity=sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy crossorigin=anonymous></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script>
-</body>
-</html>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js integrity=sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q crossorigin=anonymous></script><script src=https://xizzhu.me/js/load-photoswipe.js></script></body></html>
